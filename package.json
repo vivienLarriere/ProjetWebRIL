@@ -1,0 +1,28 @@
+{
+  "name": "projetWebRIL",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Larriere Vivien / Arneaud Alexis",
+  "license": "ISC",
+  "dependencies": {
+    "handlebars": "^4.0.12",
+    "hapi": "^17.6.0",
+    "hoek": "^5.0.4",
+    "inert": "^5.1.0",
+    "joi": "^13.7.0",
+    "mariadb": "^2.0.0-alpha",
+    "vision": "^5.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vivienLarriere/ProjetWebRIL.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vivienLarriere/ProjetWebRIL/issues"
+  },
+  "homepage": "https://github.com/vivienLarriere/ProjetWebRIL#readme"
+}
