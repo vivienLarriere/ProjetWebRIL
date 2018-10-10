@@ -2,7 +2,7 @@
 -- Hôte :                        127.0.0.1
 -- Version du serveur:           10.3.10-MariaDB - mariadb.org binary distribution
 -- SE du serveur:                Win64
--- HeidiSQL Version:             9.5.0.5196
+-- HeidiSQL Version:             9.4.0.5125
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -78,6 +78,7 @@ DROP TABLE IF EXISTS `statut`;
 CREATE TABLE IF NOT EXISTS `statut` (
   `STATUT_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `STATUT_LIB` varchar(200) DEFAULT NULL,
+  `STATUT_DESCRIPTION` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`STATUT_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -149,6 +150,8 @@ CREATE TABLE IF NOT EXISTS `vehicule` (
   `VEHICULE_ACTIF` tinyint(1) unsigned DEFAULT NULL,
   `VEHICULE_ID_AGENCE` int(11) unsigned DEFAULT NULL,
   `VEHICULE_ID_STATUT` int(11) unsigned DEFAULT NULL,
+  `VEHICULE_MARQUE` varchar(50) NOT NULL,
+  `VEHICULE_MODELE` varchar(50) NOT NULL,
   PRIMARY KEY (`VEHICULE_ID`),
   KEY `FK_vehicule_agence` (`VEHICULE_ID_AGENCE`),
   CONSTRAINT `FK_vehicule_agence` FOREIGN KEY (`VEHICULE_ID_AGENCE`) REFERENCES `agence` (`AGENCE_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
