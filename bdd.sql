@@ -1,4 +1,4 @@
--- --------------------------------------------------------
+﻿-- --------------------------------------------------------
 -- Hôte :                        127.0.0.1
 -- Version du serveur:           10.3.10-MariaDB - mariadb.org binary distribution
 -- SE du serveur:                Win64
@@ -173,3 +173,8 @@ CREATE TABLE IF NOT EXISTS `vehicule_has_fichier` (
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+-- update vehicule
+ALTER TABLE `vehicule`
+	CHANGE COLUMN `VEHICULE_MODELE` `VEHICULE_MODELE` VARCHAR(200) NULL DEFAULT NULL AFTER `VEHICULE_ID_STATUT`,
+	CHANGE COLUMN `VEHICULE_MARQUE` `VEHICULE_MARQUE` VARCHAR(200) NULL DEFAULT NULL AFTER `VEHICULE_MODELE`;
