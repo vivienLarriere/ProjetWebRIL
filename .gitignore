@@ -100,3 +100,5 @@ GitHub.sublime-settings
 note_projetWeb\.odt
 
 node_modules/
+
+.idea/
