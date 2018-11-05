@@ -11,10 +11,9 @@
   "dependencies": {
     "handlebars": "^4.0.12",
     "hapi": "^17.6.0",
-    "hoek": "^5.0.4",
+    "hapi-mysql2": "^2.2.4",
     "inert": "^5.1.0",
-    "joi": "^13.7.0",
-    "mariadb": "^2.0.0-alpha",
+    "nodemon": "^1.18.5",
     "vision": "^5.4.0"
   },
   "repository": {
