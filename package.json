@@ -9,6 +9,7 @@
   "author": "Larriere Vivien / Arneaud Alexis",
   "license": "ISC",
   "dependencies": {
+    "bulma": "^0.7.2",
     "handlebars": "^4.0.12",
     "hapi": "^17.6.4",
     "hapi-mysql2": "^2.2.4",
