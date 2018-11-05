@@ -10,11 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "handlebars": "^4.0.12",
-    "hapi": "^17.6.0",
+    "hapi": "^17.6.4",
     "hapi-mysql2": "^2.2.4",
-    "inert": "^5.1.0",
+    "inert": "^5.1.1",
     "nodemon": "^1.18.5",
-    "vision": "^5.4.0"
+    "vision": "^5.4.2"
   },
   "repository": {
     "type": "git",
