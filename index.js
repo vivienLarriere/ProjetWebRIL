@@ -4,7 +4,6 @@ const Hapi = require('hapi');
 const Vision = require('vision');
 const Handlebars = require('handlebars');
 const Inert = require('inert');
-const Bcrypt = require('bcrypt');
 const Boom = require('boom');
 
 // Notre chemin vers notre gestionnaire d'URL
