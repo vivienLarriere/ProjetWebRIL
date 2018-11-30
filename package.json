@@ -1,6 +1,6 @@
 {
   "name": "projetWebRIL",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -19,8 +19,7 @@
     "hapi-mysql2": "^2.2.4",
     "inert": "^5.1.2",
     "nodemon": "^1.18.7",
-    "vision": "^5.4.3",
-    "yar": "^9.1.0"
+    "vision": "^5.4.3"
   },
   "repository": {
     "type": "git",
