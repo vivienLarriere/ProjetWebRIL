@@ -8997,7 +8997,7 @@ label.panel-block:hover {
   margin-bottom: 50%;
 }
 
-.button {
+.button-accueil, .menu .button {
   margin: 10px;
   padding-top: 50px;
   padding-bottom: 50px;
