@@ -1,4 +1,4 @@
-﻿-- --------------------------------------------------------
+-- --------------------------------------------------------
 -- Hôte :                        127.0.0.1
 -- Version du serveur:           10.3.10-MariaDB - mariadb.org binary distribution
 -- SE du serveur:                Win64
@@ -11,14 +11,7 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-
--- Export de la structure de la base pour webproject
-DROP DATABASE IF EXISTS `webproject`;
-CREATE DATABASE IF NOT EXISTS `webproject` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
-USE `webproject`;
-
 -- Export de la structure de la table webproject. agence
-DROP TABLE IF EXISTS `agence`;
 CREATE TABLE IF NOT EXISTS `agence` (
   `AGENCE_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `AGENCE_NOM` varchar(200) DEFAULT NULL,
@@ -33,7 +26,6 @@ CREATE TABLE IF NOT EXISTS `agence` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 -- Export de la structure de la table webproject. fichier
-DROP TABLE IF EXISTS `fichier`;
 CREATE TABLE IF NOT EXISTS `fichier` (
   `FICHIER_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `FICHIER_EXTENSION` varchar(50) DEFAULT NULL,
@@ -43,7 +35,6 @@ CREATE TABLE IF NOT EXISTS `fichier` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 -- Export de la structure de la table webproject. historique
-DROP TABLE IF EXISTS `historique`;
 CREATE TABLE IF NOT EXISTS `historique` (
   `HISTO_ID_TYPE_HISTO` int(11) unsigned NOT NULL,
   `HISTO_DATE` timestamp NULL DEFAULT current_timestamp(),
@@ -65,7 +56,6 @@ CREATE TABLE IF NOT EXISTS `historique` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 -- Export de la structure de la table webproject. permission
-DROP TABLE IF EXISTS `permission`;
 CREATE TABLE IF NOT EXISTS `permission` (
   `PERMISSION_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `PERMISSION_LIB` varchar(200) DEFAULT NULL,
@@ -74,7 +64,6 @@ CREATE TABLE IF NOT EXISTS `permission` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 -- Export de la structure de la table webproject. statut
-DROP TABLE IF EXISTS `statut`;
 CREATE TABLE IF NOT EXISTS `statut` (
   `STATUT_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `STATUT_LIB` varchar(200) DEFAULT NULL,
@@ -84,7 +73,6 @@ CREATE TABLE IF NOT EXISTS `statut` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 -- Export de la structure de la table webproject. ticket
-DROP TABLE IF EXISTS `ticket`;
 CREATE TABLE IF NOT EXISTS `ticket` (
   `TICKET_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `TICKET_OBJET` varchar(200) DEFAULT NULL,
@@ -100,7 +88,6 @@ CREATE TABLE IF NOT EXISTS `ticket` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 -- Export de la structure de la table webproject. type_histo
-DROP TABLE IF EXISTS `type_histo`;
 CREATE TABLE IF NOT EXISTS `type_histo` (
   `TYPE_HISTO_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `TYPE_HISTO_LIB` varchar(200) DEFAULT NULL,
@@ -109,7 +96,6 @@ CREATE TABLE IF NOT EXISTS `type_histo` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 -- Export de la structure de la table webproject. utilisateur
-DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `UTILISATEUR_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `UTILISATEUR_IDENTIFIANT` varchar(50) DEFAULT NULL,
@@ -126,7 +112,6 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 -- Export de la structure de la table webproject. utilisateur_has_perm
-DROP TABLE IF EXISTS `utilisateur_has_perm`;
 CREATE TABLE IF NOT EXISTS `utilisateur_has_perm` (
   `UP_PERM_ID` int(11) unsigned NOT NULL,
   `UP_UTILISATEUR_ID` int(11) unsigned NOT NULL,
@@ -138,7 +123,6 @@ CREATE TABLE IF NOT EXISTS `utilisateur_has_perm` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 -- Export de la structure de la table webproject. vehicule
-DROP TABLE IF EXISTS `vehicule`;
 CREATE TABLE IF NOT EXISTS `vehicule` (
   `VEHICULE_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `VEHICULE_DATE_FABRICATION` date DEFAULT NULL,
@@ -159,7 +143,6 @@ CREATE TABLE IF NOT EXISTS `vehicule` (
 
 -- Les données exportées n'étaient pas sélectionnées.
 -- Export de la structure de la table webproject. vehicule_has_fichier
-DROP TABLE IF EXISTS `vehicule_has_fichier`;
 CREATE TABLE IF NOT EXISTS `vehicule_has_fichier` (
   `VF_ID_VEHICULE` int(11) unsigned NOT NULL,
   `VF_ID_FICHIER` int(11) unsigned NOT NULL,
@@ -173,8 +156,3 @@ CREATE TABLE IF NOT EXISTS `vehicule_has_fichier` (
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-
--- update vehicule
-ALTER TABLE `vehicule`
-	CHANGE COLUMN `VEHICULE_MODELE` `VEHICULE_MODELE` VARCHAR(200) NULL DEFAULT NULL AFTER `VEHICULE_ID_STATUT`,
-	CHANGE COLUMN `VEHICULE_MARQUE` `VEHICULE_MARQUE` VARCHAR(200) NULL DEFAULT NULL AFTER `VEHICULE_MODELE`;
