@@ -10,12 +10,17 @@
   "license": "ISC",
   "dependencies": {
     "bulma": "^0.7.2",
+    "bcrypt": "^3.0.2",
+    "boom": "^7.3.0",
     "handlebars": "^4.0.12",
-    "hapi": "^17.6.4",
+    "hapi": "^17.8.1",
+    "hapi-auth-basic": "^5.0.0",
+    "hapi-auth-cookie": "^9.1.0",
     "hapi-mysql2": "^2.2.4",
-    "inert": "^5.1.1",
-    "nodemon": "^1.18.5",
-    "vision": "^5.4.2"
+    "inert": "^5.1.2",
+    "nodemon": "^1.18.7",
+    "vision": "^5.4.3",
+    "yar": "^9.1.0"
   },
   "repository": {
     "type": "git",
