@@ -8997,10 +8997,18 @@ label.panel-block:hover {
   margin-bottom: 50%;
 }
 
-.button {
+.button-accueil, .menu-interne .button {
   margin: 10px;
   padding-top: 50px;
   padding-bottom: 50px;
+  width: 100%;
+  white-space: initial;
+}
+
+.menu-interne .button {
+  margin: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   width: 100%;
   white-space: initial;
 }
@@ -9023,9 +9031,22 @@ label.panel-block:hover {
   align-self: stretch;
 }
 
+/* LOGIN */
+.is-centered {
+  width: 100%;
+  margin: 0 auto;
+  min-height: 10em;
+  vertical-align: middle;
+}
+.is-centered img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* PAGES INTERNES */
 .menu-interne {
-  margin: 50px;
+  margin: 0 50px;
 }
 .menu-interne img {
   min-width: 35px;
