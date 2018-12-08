@@ -8972,7 +8972,7 @@ label.panel-block:hover {
 /*Mettre "../" pour les liens dans le css car ça tombe sur "./css" */
 /*html {background-color: $green;}*/
 .hero-body {
-  background: linear-gradient(#000c, #000c), url("../ressources/images/header.jpg");
+  background: linear-gradient(#000c, #000c), url("../images/header.jpg");
   background-size: 100%;
   background-position: 0 -100px;
 }

@@ -26,13 +26,13 @@ $primary-invert: $pink-invert;
 // 4. Import the rest of Bulma
 */
 
-@import "../../../node_modules/bulma/bulma";
+@import "../../node_modules/bulma/bulma";
 /*$blue: #0000ff;*/
 
 /*Mettre "../" pour les liens dans le css car ça tombe sur "./css" */
 
 /*html {background-color: $green;}*/
-.hero-body {background: linear-gradient(#000c,#000c),url("../ressources/images/header.jpg");
+.hero-body {background: linear-gradient(#000c,#000c),url("../images/header.jpg");
 background-size: 100%;
 background-position: 0 -100px;
 }
