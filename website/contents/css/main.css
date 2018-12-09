@@ -8970,10 +8970,7 @@ label.panel-block:hover {
 
 /*$blue: #0000ff;*/
 /*Mettre "../" pour les liens dans le css car ça tombe sur "./css" */
-html {
-  background-color: #0a0a0a;
-}
-
+/*html {background-color: $black;}*/
 .hero-body {
   background: linear-gradient(#000c, #000c), url("../ressources/images/header.jpg");
   background-size: 100%;

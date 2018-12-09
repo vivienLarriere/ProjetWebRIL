@@ -31,7 +31,7 @@ $primary-invert: $pink-invert;
 
 /*Mettre "../" pour les liens dans le css car ça tombe sur "./css" */
 
-html {background-color: $black;}
+/*html {background-color: $black;}*/
 .hero-body {background: linear-gradient(#000c,#000c),url("../ressources/images/header.jpg");
 background-size: 100%;
 background-position: 0 -100px;
