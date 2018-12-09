@@ -31,7 +31,7 @@ $primary-invert: $pink-invert;
 
 /*Mettre "../" pour les liens dans le css car ça tombe sur "./css" */
 
-/*html {background-color: $green;}*/
+html {background-color: $black;}
 .hero-body {background: linear-gradient(#000c,#000c),url("../ressources/images/header.jpg");
 background-size: 100%;
 background-position: 0 -100px;
@@ -63,7 +63,13 @@ color: $white;}
 	}
 
 }
-
+.se-connecter{
+	margin: 50px 0;
+	input{
+		margin: 10px 0;
+	}
+	.button{margin: 25px 0px;}
+}
 
 /* PAGES INTERNES */
 .menu-interne {
@@ -84,4 +90,7 @@ color: $white;}
 		background: initial;
 		color: initial;
 	}
+}
+.descriptif{
+	p{font-weight: 600;}
 }
