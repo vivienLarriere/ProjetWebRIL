@@ -9031,6 +9031,10 @@ label.panel-block:hover {
   align-self: stretch;
 }
 
+.columns {
+  margin: 0 !important;
+}
+
 /* LOGIN */
 .is-centered {
   width: 100%;
@@ -9085,6 +9089,10 @@ label.panel-block:hover {
   color: initial;
 }
 
+.descriptif {
+  flex-direction: column !important;
+  margin: 0 25% !important;
+}
 .descriptif p {
   font-weight: 600;
 }
