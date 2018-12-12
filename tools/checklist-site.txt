@@ -1,0 +1,15 @@
+Se connecter					[X]
+Page d'accueil					[X]
+Liste véhicules					[X]
+Statut véhicules				[X]
+Réserver véhicules				[]
+Signaler un retour				[X]
+Liste utilisateurs				[]
+
+ADMIN:
+Gestion agences					[]
+Ajouter une agence				[]
+Ajouter un véhicules			[X]
+Liste Status					[X]
+Ajotuer Status					[]
+Ajouter utilisateurs			[]

@@ -9097,4 +9097,9 @@ label.panel-block:hover {
   font-weight: 600;
 }
 
+.dimensions .column {
+  padding: 0;
+  padding-right: 5px;
+}
+
 /*# sourceMappingURL=main.css.map */
