@@ -7,9 +7,16 @@ Signaler un retour				[X]
 Liste utilisateurs				[]
 
 ADMIN:
-Gestion agences					[]
-Ajouter une agence				[]
+Gestion agences					[X]
+Ajouter une agence				[X]
 Ajouter un véhicules			[X]
 Liste Status					[X]
 Ajotuer Status					[]
 Ajouter utilisateurs			[]
+
+AJOUTS:
+Liens entre les pages			[]
+ajouts codes Node.js			[]
+
+REPONSIVE:
+Sur mobile						[]

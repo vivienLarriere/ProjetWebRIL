@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Liste des agences</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  </head>
+  <body>
+    <section class="section">
+      <!--Insérer le texte pour le site-->
+      <!-- MENU -->
+      <span class="menu-interne">
+        <div class="columns">      <!-- menu-->
+        <div class="column is-one-third">
+          <div class="columns">
+            <div class="column ">
+              <a href="../index.html"><span class="button is-medium">
+                <i class="fas fa-home fa-2x"></i>
+              </span></a>
+            </div>
+            <div class="column">
+              <span class="button is-medium">
+                <i class="fas fa-car fa-2x"></i>
+              </span>
+            </div>
+            <div class="column">
+              <span class="button is-medium">
+                <img src="./ressources/images/choisir-un-vehicule.png" width="32px"/>
+              </span>
+            </div>
+            <div class="column">
+              <span class="button is-medium">
+                <i class="fas fa-unlock fa-2x"></i>
+              </span>
+            </div>
+            </di>
+          </div>
+        </div>
+        <div class="column is-one-fifth"></div>
+        <!-- Titre page -->
+        <div class="column is-one-fifth" style="text-align: right;">
+          <p>Liste des agences</p>
+        </div>
+        <!-- LOGO -->
+        <div class="column is-one-fifth">
+          <img src="./ressources/images/logo.png" width=""/>
+        </div>
+      </div>
+    </span>
+    <!-- Page d'accueil -->
+    <div>
+      <!-- Indiquer nb d'agences dispo - Module nb agences -->
+    </div>
+    <!-- Barre de recherche rapide -->
+    <div class="columns recherche">
+      <div class="column"><input class="input" type="text" placeholder="Ville"></div>
+      <div class="column"><input class="input" type="text" placeholder="Tél."></div>
+      <div class="column"><input class="input" type="text" placeholder="Fax"></div>
+      <div class="column"><input class="button" type="reset" value="Réinitialiser"></div>
+      <div class="column"><input class="button" type="submit" value="Rechercher"></div>
+    </div>
+    <!-- TABLEAU -->
+    <div>
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>Agence</th>
+            <th>Adresse</th>
+            <th>Tél.</th>
+            <th>Fax</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <!-- Mettre balises pour les données de la DB -->
+        <tbody>
+          <tr>
+            <td>Nantes</td>
+            <td>20 Avenue du Général De Gaulle</td>
+            <td>00 11 22 33 44</td>
+            <td></td>
+            <td> <i class="fas fa-wrench fa-2x"></i><span style="width: 50px"> </span> <i class="fas fa-times fa-2x"></i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <!-- FOOTER -->
+  <footer class="footer has-text-centered">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-8-desktop is-offset-2-desktop">
+          <p>
+            <strong class="has-text-weight-semibold">
+            <a href="https://www.npmjs.com/package/bulma-start">bulma-start@0.0.1</a>
+            </strong>
+          </p>
+          <p>
+            <small>
+            Source code licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>
+            </small>
+          </p>
+          <p style="margin-top: 1rem;">
+            <a href="http://bulma.io">
+              <img src="made-with-bulma.png" alt="Made with Bulma" width="128" height="24">
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script type="text/javascript" src="lib/main.js"></script>
+</body>
+</html>
