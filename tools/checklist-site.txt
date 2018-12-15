@@ -2,7 +2,7 @@ Se connecter					[X]
 Page d'accueil					[X]
 Liste véhicules					[X]
 Statut véhicules				[X]
-Réserver véhicules				[]
+Réserver véhicule				[X]
 Signaler un retour				[X]
 Liste utilisateurs				[]
 
@@ -12,7 +12,7 @@ Ajouter une agence				[X]
 Ajouter un véhicules			[X]
 Liste Status					[X]
 Ajotuer Status					[]
-Ajouter utilisateurs			[]
+Ajouter utilisateurs			[X]
 
 AJOUTS:
 Liens entre les pages			[]
