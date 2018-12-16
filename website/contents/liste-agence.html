@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Liste des véhicules</title>
+    <title>Liste des agences</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   </head>
@@ -40,11 +40,11 @@
           </div>
         </div>
         <div class="column is-one-fifth"></div>
-            <!-- Titre page -->
+        <!-- Titre page -->
         <div class="column is-one-fifth" style="text-align: right;">
-          <p>Liste véhicules</p>
+          <p>Liste des agences</p>
         </div>
-            <!-- LOGO -->
+        <!-- LOGO -->
         <div class="column is-one-fifth">
           <img src="./ressources/images/logo.png" width=""/>
         </div>
@@ -52,15 +52,13 @@
     </span>
     <!-- Page d'accueil -->
     <div>
-      <!-- Indiquer nb véhicules dispo - Module nb véhicules -->
-      <p>Il y a 5 véhicules disponibles</p>
+      <!-- Indiquer nb d'agences dispo - Module nb agences -->
     </div>
     <!-- Barre de recherche rapide -->
     <div class="columns recherche">
-      <div class="column"><input class="input" type="text" placeholder="Marque"></div>
-      <div class="column"><input class="input" type="text" placeholder="Agence"></div>
-      <div class="column"><input class="input" type="text" placeholder="Text input"></div>
-      <div class="column"><input class="input" type="text" placeholder="Statut"></div>
+      <div class="column"><input class="input" type="text" placeholder="Ville"></div>
+      <div class="column"><input class="input" type="text" placeholder="Tél."></div>
+      <div class="column"><input class="input" type="text" placeholder="Fax"></div>
       <div class="column"><input class="button" type="reset" value="Réinitialiser"></div>
       <div class="column"><input class="button" type="submit" value="Rechercher"></div>
     </div>
@@ -69,24 +67,20 @@
       <table class="table is-fullwidth">
         <thead>
           <tr>
-            <th>Marque </th>
-            <th>Modéle</th>
             <th>Agence</th>
-            <th>Date de Prêt</th>
-            <th>Date de retour</th>
-            <th>Statut</th>
+            <th>Adresse</th>
+            <th>Tél.</th>
+            <th>Fax</th>
             <th>Options</th>
           </tr>
         </thead>
         <!-- Mettre balises pour les données de la DB -->
         <tbody>
           <tr>
-            <td>Siku</td>
-            <td>Siku2936</td>
             <td>Nantes</td>
-            <td>09/10/18</td>
-            <td>19/10/18</td>
-            <td>Location</td>
+            <td>20 Avenue du Général De Gaulle</td>
+            <td>00 11 22 33 44</td>
+            <td></td>
             <td> <i class="fas fa-wrench fa-2x"></i><span style="width: 50px"> </span> <i class="fas fa-times fa-2x"></i></td>
           </tr>
         </tbody>

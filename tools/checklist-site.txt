@@ -1,0 +1,22 @@
+Se connecter					[X]
+Page d'accueil					[X]
+Liste véhicules					[X]
+Statut véhicules				[X]
+Réserver véhicule				[X]
+Signaler un retour				[X]
+Liste utilisateurs				[]
+
+ADMIN:
+Gestion agences					[X]
+Ajouter une agence				[X]
+Ajouter un véhicules			[X]
+Liste Status					[X]
+Ajotuer Status					[]
+Ajouter utilisateurs			[X]
+
+AJOUTS:
+Liens entre les pages			[]
+ajouts codes Node.js			[]
+
+REPONSIVE:
+Sur mobile						[]

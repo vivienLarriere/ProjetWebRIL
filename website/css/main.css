@@ -8970,7 +8970,7 @@ label.panel-block:hover {
 
 /*$blue: #0000ff;*/
 /*Mettre "../" pour les liens dans le css car ça tombe sur "./css" */
-/*html {background-color: $green;}*/
+/*html {background-color: $black;}*/
 .hero-body {
   background: linear-gradient(#000c, #000c), url("../images/header.jpg");
   background-size: 100%;
@@ -9031,6 +9031,10 @@ label.panel-block:hover {
   align-self: stretch;
 }
 
+.columns {
+  margin: 0 !important;
+}
+
 /* LOGIN */
 .is-centered {
   width: 100%;
@@ -9042,6 +9046,16 @@ label.panel-block:hover {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.se-connecter {
+  margin: 50px 0;
+}
+.se-connecter input {
+  margin: 10px 0;
+}
+.se-connecter .button {
+  margin: 25px 0px;
 }
 
 /* PAGES INTERNES */
@@ -9073,6 +9087,19 @@ label.panel-block:hover {
 .table th:hover {
   background: initial;
   color: initial;
+}
+
+.descriptif {
+  flex-direction: column !important;
+  margin: 0 25% !important;
+}
+.descriptif p {
+  font-weight: 600;
+}
+
+.dimensions .column {
+  padding: 0;
+  padding-right: 5px;
 }
 
 /*# sourceMappingURL=main.css.map */
