@@ -1,17 +1,20 @@
+PAGES :
+
 Se connecter					[X]
 Page d'accueil					[X]
 Liste véhicules					[X]
 Statut véhicules				[X]
 Réserver véhicule				[X]
 Signaler un retour				[X]
-Liste utilisateurs				[]
+Liste utilisateurs				[X]
+Infos utilisateurs				[X]
 
-ADMIN:
+PAGES ADMIN :
 Gestion agences					[X]
 Ajouter une agence				[X]
 Ajouter un véhicules			[X]
 Liste Status					[X]
-Ajotuer Status					[]
+Ajotuer Status					[X]
 Ajouter utilisateurs			[X]
 
 AJOUTS:
