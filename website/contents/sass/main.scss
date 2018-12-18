@@ -54,15 +54,18 @@ color: $white;}
 	width: 100%;
 	margin: 0 auto;
 	min-height: 10em;
-
 	vertical-align: middle;
 	img{
     display: block;
     margin-left: auto;
     margin-right: auto 
 	}
-
 }
+
+.is-large{
+	min-width: 250px;
+}
+
 .se-connecter{
 	margin: 50px 0;
 	input{
