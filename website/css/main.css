@@ -9102,4 +9102,10 @@ label.panel-block:hover {
   padding-right: 5px;
 }
 
+a.btn-a {
+  margin-left: 25px;
+  font-size: initial;
+  padding: 10px;
+}
+
 /*# sourceMappingURL=main.css.map */

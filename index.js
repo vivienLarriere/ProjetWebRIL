@@ -12,7 +12,7 @@ const sid = 1;
 
 const launchServer = async function () {
           // définition des caractéristique de notre serveur Node.
-          // Ici sur le port 8080 et sur l'adresse 'localhost'
+          // Ici sur le port 3000 et sur l'adresse 'localhost'
           const server = Hapi.Server({port: 3000, host: 'localhost'});
           await server.register(require('hapi-auth-cookie'));
           // Enregistre le module vision permettant l'interprétation des vues HTML
@@ -123,17 +123,6 @@ const launchServer = async function () {
                               }
                       }
                   }
-              },
-              {
-                  method : ['GET'],
-                  path   : '/login',
-                  options: {
-                      auth   : false,
-                      handler: async function (request, h) {
-                          return h.view('login');
-                      }
-                  }
-
               },
               {
                   method : 'GET',
