@@ -44,11 +44,15 @@ module.exports = [
             try {
                 // Notre requête
                 // La réponse est stocké automatiquement sous la forme d'un JSON dans la variable rows
-                const [rows] = await pool.query(`select * from vehicule where VEHICULE_ID = ${request.params.vehicule_id};`);
+                const [rows] = await pool.query(`select * from vehicule LEFT JOIN statut on STATUT_ID = VEHICULE_ID_STATUT where VEHICULE_ID = ${request.params.vehicule_id};`);
+                const [rows2] = await pool.query(`select * from agence where AGENCE_ID = ${rows.VEHICULE_ID_AGENCE};`);
 
                 // On charge la vue 'front-page' avec nos données SQL
                 // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
-                return reply.view('statut-vehicule', {vehicule: rows});
+                return reply.view('statut-vehicule', {
+                    vehicule: rows,
+                    agence: rows2
+                });
             } catch (err) {
                 // Boom est un plugin permettant la gestion des erreurs de l'application
                 throw Boom.internal('Internal Mysql Error', err)
@@ -246,13 +250,72 @@ module.exports = [
             return reply.view('ajouter-utilisateur');
         }
     },
+    {
+        method: 'GET',
+        path: '/utilisateurs',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            // On ouvre une requête à MySQL
+            const pool = request.mysql.pool;
+            try {
+                // Notre requête
+                // La réponse est stocké automatiquement sous la forme d'un JSON dans la variable rows
+                const [rows] = await pool.query('select * from utilisateur;');
+                // On charge la vue 'front-page' avec nos données SQL
+                // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
+                return reply.view('liste-utilisateurs', {
+                    utilisateurs: rows,
+                });
+            } catch (err) {
+                // Boom est un plugin permettant la gestion des erreurs de l'application
+                throw Boom.internal('Internal Mysql Error', err)
+            }
+        }
+    },
+    {
+        method: 'GET',
+        path: '/utilisateur/{utilisateur_id}',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            // On ouvre une requête à MySQL
+            const pool = request.mysql.pool;
+            try {
+                // Notre requête
+                // La réponse est stocké automatiquement sous la forme d'un JSON dans la variable rows
+                const [rows] = await pool.query(`select * from utilisateur where UTILISATEUR_ID = ${request.params.utilisateur_id};`);
 
+                // On charge la vue 'front-page' avec nos données SQL
+                // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
+                return reply.view('info-utilisateur', {utilisateur: rows});
+            } catch (err) {
+                // Boom est un plugin permettant la gestion des erreurs de l'application
+                throw Boom.internal('Internal Mysql Error', err)
+            }
+        }
+    },
+    {
+        method: 'POST',
+        path: '/utilisateur/add',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            // On ouvre une requête à MySQL
+            const pool = request.mysql.pool;
+            try {
+                const [rows] = await pool.query(`insert into utilisateur (UTILISATEUR_IDENTIFIANT, UTILISATEUR_NOM, UTILISATEUR_PRENOM, UTILISATEUR_TEL, UTILISATEUR_FAX, UTILISATEUR_MOBILE, UTILISATEUR_PWD) VALUES ("${request.payload.identifiant}", "${request.payload.nom}", "${request.payload.prenom}", , "${request.payload.tel}"), "${request.payload.fax}", "${request.payload.mobile}", "${request.payload.pwd}";`);
+                return reply.redirect('/vehicules');
+            } catch (err) {
+                console.log(err);
+                throw Boom.internal('Internal Mysql Error', err)
+            }
+        }
+    },
 
-    /*
-     ****************************
-     ******** VEHICULES *********
-     ****************************
-     */
     {
         method: 'GET',
         path: '/{path*}',

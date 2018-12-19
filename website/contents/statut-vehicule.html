@@ -1,5 +1,5 @@
 <div>
-    <h1 class="title is-1">Kärcher MC 130</h1>
+    <h1 class="title is-1">{{vehicule.VEHICULE_MARQUE}} {{vehicule.VEHICULE_MODELE}}</h1>
 </div>
 <HR size="5">
 <div class="is-divider"></div>
@@ -8,39 +8,35 @@
         <div class="columns descriptif">
             <div class="columns ">
                 <div class="column"><p>Marque</p></div>
-                <div class="column"><p>Kärcher</p></div>
+                <div class="column"><p>{{vehicule.VEHICULE_MARQUE}} </p></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Modèle</p></div>
-                <div class="column"><p>MC 130</p></div>
+                <div class="column"><p>{{vehicule.VEHICULE_MODELE}} </p></div>
             </div>
             <div class="columns ">
-                <div class="column"><p>Agence Afiliée</p></div>
-                <div class="column"><p>Nantes</p></div>
+                <div class="column"><p>Agence Affiliée</p></div>
+                <div onclick="window.location = '{{thisURL}}agence/{{agence.AGENCE_ID}}';" class="column"><p>{{agence.AGENCE_NOM}}</p></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Dimensions</p></div>
-                <div class="column"><p>3950 x 1200 x 1990</p></div>
+                <div class="column"><p>{{vehicule.VEHICULE_HAUTEUR}} x {{vehicule.VEHICULE_LONGUEUR}} x {{vehicule.VEHICULE_LARGEUR}}</p></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Poids</p></div>
-                <div class="column"><p>2350</p></div>
+                <div class="column"><p>{{vehicule.VEHICULE_POIDS}} kg</p></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Date de création</p></div>
-                <div class="column"><p>2017</p></div>
+                <div class="column"><p>{{vehicule.VEHICULE_DATE_FABRICATION}}</p></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Date de prêt</p></div>
-                <div class="column"><p>19/10/18</p></div>
-            </div>
-            <div class="columns ">
-                <div class="column"><p>Date de retour</p></div>
-                <div class="column"><p>09/10/18</p></div>
+                <div class="column"><p>{{vehicule.VEHICULE_DATE_DERNIER_PRET}}</p></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Statut</p></div>
-                <div class="column"><p>Location</p></div>
+                <div class="column"><p>{{vehicule.STATUT_LIB}</p></div>
             </div>
             <div class="columns "></div>
         </div>
