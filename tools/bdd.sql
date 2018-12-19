@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Hôte :                        127.0.0.1
--- Version du serveur:           10.3.10-MariaDB - mariadb.org binary distribution
--- SE du serveur:                Win64
--- HeidiSQL Version:             9.4.0.5125
+-- Version du serveur:           5.7.11 - MySQL Community Server (GPL)
+-- SE du serveur:                Win32
+-- HeidiSQL Version:             9.5.0.5328
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -11,7 +11,14 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Export de la structure de la table webproject. agence
+
+-- Listage de la structure de la base pour webprojectril
+DROP DATABASE IF EXISTS `webprojectril`;
+CREATE DATABASE IF NOT EXISTS `webprojectril` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+USE `webprojectril`;
+
+-- Listage de la structure de la table webprojectril. agence
+DROP TABLE IF EXISTS `agence`;
 CREATE TABLE IF NOT EXISTS `agence` (
   `AGENCE_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `AGENCE_NOM` varchar(200) DEFAULT NULL,
@@ -21,11 +28,14 @@ CREATE TABLE IF NOT EXISTS `agence` (
   `AGENCE_TEL` varchar(200) DEFAULT NULL,
   `AGENCE_FAX` varchar(200) DEFAULT NULL,
   `AGENCE_ID_FICHIER` int(11) unsigned DEFAULT NULL,
-  PRIMARY KEY (`AGENCE_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`AGENCE_ID`),
+  KEY `FK_fichier_agence` (`AGENCE_ID_FICHIER`),
+  CONSTRAINT `FK_fichier_agence` FOREIGN KEY (`AGENCE_ID_FICHIER`) REFERENCES `fichier` (`FICHIER_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 -- Les données exportées n'étaient pas sélectionnées.
--- Export de la structure de la table webproject. fichier
+-- Listage de la structure de la table webprojectril. fichier
+DROP TABLE IF EXISTS `fichier`;
 CREATE TABLE IF NOT EXISTS `fichier` (
   `FICHIER_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `FICHIER_EXTENSION` varchar(50) DEFAULT NULL,
@@ -34,10 +44,11 @@ CREATE TABLE IF NOT EXISTS `fichier` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Les données exportées n'étaient pas sélectionnées.
--- Export de la structure de la table webproject. historique
+-- Listage de la structure de la table webprojectril. historique
+DROP TABLE IF EXISTS `historique`;
 CREATE TABLE IF NOT EXISTS `historique` (
   `HISTO_ID_TYPE_HISTO` int(11) unsigned NOT NULL,
-  `HISTO_DATE` timestamp NULL DEFAULT current_timestamp(),
+  `HISTO_DATE` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `HISTO_UTILISATEUR_ID` int(11) unsigned DEFAULT NULL,
   `HISTO_VEHICULE_ID` int(11) unsigned DEFAULT NULL,
   `HISTO_AGENCE_ID` int(11) unsigned DEFAULT NULL,
@@ -55,7 +66,17 @@ CREATE TABLE IF NOT EXISTS `historique` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Les données exportées n'étaient pas sélectionnées.
--- Export de la structure de la table webproject. permission
+-- Listage de la structure de la table webprojectril. info
+DROP TABLE IF EXISTS `info`;
+CREATE TABLE IF NOT EXISTS `info` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Les données exportées n'étaient pas sélectionnées.
+-- Listage de la structure de la table webprojectril. permission
+DROP TABLE IF EXISTS `permission`;
 CREATE TABLE IF NOT EXISTS `permission` (
   `PERMISSION_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `PERMISSION_LIB` varchar(200) DEFAULT NULL,
@@ -63,7 +84,8 @@ CREATE TABLE IF NOT EXISTS `permission` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Les données exportées n'étaient pas sélectionnées.
--- Export de la structure de la table webproject. statut
+-- Listage de la structure de la table webprojectril. statut
+DROP TABLE IF EXISTS `statut`;
 CREATE TABLE IF NOT EXISTS `statut` (
   `STATUT_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `STATUT_LIB` varchar(200) DEFAULT NULL,
@@ -72,11 +94,12 @@ CREATE TABLE IF NOT EXISTS `statut` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Les données exportées n'étaient pas sélectionnées.
--- Export de la structure de la table webproject. ticket
+-- Listage de la structure de la table webprojectril. ticket
+DROP TABLE IF EXISTS `ticket`;
 CREATE TABLE IF NOT EXISTS `ticket` (
   `TICKET_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `TICKET_OBJET` varchar(200) DEFAULT NULL,
-  `TICKET_TXT` text DEFAULT NULL,
+  `TICKET_TXT` text,
   `TICKET_ID_UTILISATEUR` int(11) unsigned DEFAULT NULL,
   `TICKET_ID_VEHICULE` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`TICKET_ID`),
@@ -87,7 +110,8 @@ CREATE TABLE IF NOT EXISTS `ticket` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Les données exportées n'étaient pas sélectionnées.
--- Export de la structure de la table webproject. type_histo
+-- Listage de la structure de la table webprojectril. type_histo
+DROP TABLE IF EXISTS `type_histo`;
 CREATE TABLE IF NOT EXISTS `type_histo` (
   `TYPE_HISTO_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `TYPE_HISTO_LIB` varchar(200) DEFAULT NULL,
@@ -95,7 +119,8 @@ CREATE TABLE IF NOT EXISTS `type_histo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Les données exportées n'étaient pas sélectionnées.
--- Export de la structure de la table webproject. utilisateur
+-- Listage de la structure de la table webprojectril. utilisateur
+DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `UTILISATEUR_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `UTILISATEUR_IDENTIFIANT` varchar(50) DEFAULT NULL,
@@ -105,13 +130,16 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `UTILISATEUR_FAX` varchar(50) DEFAULT NULL,
   `UTILISATEUR_MOBILE` varchar(50) DEFAULT NULL,
   `UTILISATEUR_ID_AGENCE` int(11) unsigned DEFAULT NULL,
+  `UTILISATEUR_PWD` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`UTILISATEUR_ID`),
   KEY `FK_utilisateur_agence` (`UTILISATEUR_ID_AGENCE`),
+  KEY `UTILISATEUR_IDENTIFIANT` (`UTILISATEUR_IDENTIFIANT`),
   CONSTRAINT `FK_utilisateur_agence` FOREIGN KEY (`UTILISATEUR_ID_AGENCE`) REFERENCES `agence` (`AGENCE_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 -- Les données exportées n'étaient pas sélectionnées.
--- Export de la structure de la table webproject. utilisateur_has_perm
+-- Listage de la structure de la table webprojectril. utilisateur_has_perm
+DROP TABLE IF EXISTS `utilisateur_has_perm`;
 CREATE TABLE IF NOT EXISTS `utilisateur_has_perm` (
   `UP_PERM_ID` int(11) unsigned NOT NULL,
   `UP_UTILISATEUR_ID` int(11) unsigned NOT NULL,
@@ -122,7 +150,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur_has_perm` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Les données exportées n'étaient pas sélectionnées.
--- Export de la structure de la table webproject. vehicule
+-- Listage de la structure de la table webprojectril. vehicule
+DROP TABLE IF EXISTS `vehicule`;
 CREATE TABLE IF NOT EXISTS `vehicule` (
   `VEHICULE_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `VEHICULE_DATE_FABRICATION` date DEFAULT NULL,
@@ -138,11 +167,14 @@ CREATE TABLE IF NOT EXISTS `vehicule` (
   `VEHICULE_MODELE` varchar(50) NOT NULL,
   PRIMARY KEY (`VEHICULE_ID`),
   KEY `FK_vehicule_agence` (`VEHICULE_ID_AGENCE`),
+  KEY `FK_statut_vehicule` (`VEHICULE_ID_STATUT`),
+  CONSTRAINT `FK_statut_vehicule` FOREIGN KEY (`VEHICULE_ID_STATUT`) REFERENCES `statut` (`STATUT_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_vehicule_agence` FOREIGN KEY (`VEHICULE_ID_AGENCE`) REFERENCES `agence` (`AGENCE_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Les données exportées n'étaient pas sélectionnées.
--- Export de la structure de la table webproject. vehicule_has_fichier
+-- Listage de la structure de la table webprojectril. vehicule_has_fichier
+DROP TABLE IF EXISTS `vehicule_has_fichier`;
 CREATE TABLE IF NOT EXISTS `vehicule_has_fichier` (
   `VF_ID_VEHICULE` int(11) unsigned NOT NULL,
   `VF_ID_FICHIER` int(11) unsigned NOT NULL,

@@ -3,10 +3,10 @@
 module.exports = [
 
     {
-        method: ['GET'],
-        path: '/login',
+        method : ['GET'],
+        path   : '/login',
         options: {
-            auth: false,
+            auth   : false,
             handler: async function (request, h) {
                 return h.view('login');
             }
@@ -20,7 +20,7 @@ module.exports = [
      */
     {
         method: 'GET',
-        path: '/vehicules',
+        path  : '/vehicules',
         config: {
             auth: 'session'
         },
@@ -34,7 +34,11 @@ module.exports = [
 
                 // On charge la vue 'front-page' avec nos données SQL
                 // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
-                return reply.view('liste-vehicule', {vehicules: rows});
+                let data = {
+                    vehicules   : rows,
+                    nb_vehicules: rows.length
+                };
+                return reply.view('liste-vehicule', data);
             } catch (err) {
                 // Boom est un plugin permettant la gestion des erreurs de l'application
                 throw Boom.internal('Internal Mysql Error', err)
@@ -43,7 +47,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/vehicule/{vehicule_id}',
+        path  : '/vehicule/{vehicule_id}',
         config: {
             auth: 'session'
         },
@@ -66,7 +70,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/vehicule/agence/{agence_id}',
+        path  : '/vehicule/agence/{agence_id}',
         config: {
             auth: 'session'
         },
@@ -89,7 +93,7 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: '/vehicule/add',
+        path  : '/vehicule/add',
         config: {
             auth: 'session'
         },
@@ -105,6 +109,26 @@ module.exports = [
             }
         }
     },
+    {
+        method: 'GET',
+        path  : '/vehicule/add',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            const pool = request.mysql.pool;
+            try {
+                const [rows] = await pool.query(`select * from agence`);
+                let data = {
+                    agences: rows
+                };
+                return reply.view('ajouter-vehicule', data);
+            } catch (err) {
+                console.log(err);
+                throw Boom.internal('Internal Mysql Error', err)
+            }
+        }
+    },
     /*
      ****************************
      ********* AGENCE ***********
@@ -112,7 +136,7 @@ module.exports = [
      */
     {
         method: 'GET',
-        path: '/agences',
+        path  : '/agences',
         config: {
             auth: 'session'
         },
@@ -122,7 +146,7 @@ module.exports = [
             try {
                 // Notre requête
                 // La réponse est stocké automatiquement sous la forme d'un JSON dans la variable rows
-                const [rows] = await pool.query('select * from vehicule;');
+                const [rows] = await pool.query('select * from agence;');
 
                 // On charge la vue 'front-page' avec nos données SQL
                 // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
@@ -135,7 +159,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/agence/add',
+        path  : '/agence/add',
         config: {
             auth: 'session'
         },
@@ -146,7 +170,7 @@ module.exports = [
 
     {
         method: 'POST',
-        path: '/agence/add',
+        path  : '/agence/add',
         config: {
             auth: 'session'
         },
@@ -215,8 +239,8 @@ module.exports = [
      ****************************
      */
     {
-        method: 'GET',
-        path: '/{path*}',
+        method : 'GET',
+        path   : '/{path*}',
         handler: (request, reply) => {
             return reply.view('404').code(404)
         }

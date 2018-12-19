@@ -30,7 +30,7 @@ $primary-invert: $pink-invert;
 
 /*html {background-color: $black;}*/
 .hero-body {
-  background: linear-gradient(#000c, #000c), url("../images/header.jpg");
+  background: url("../images/header.jpg");
   background-size: 100%;
   background-position: 0 -100px;
 }
