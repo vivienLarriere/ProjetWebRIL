@@ -1,78 +1,26 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="fr">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Projet web en Bulma</title>
-    <link rel="stylesheet" href="contents/css/main.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-  </head>
-  <body>
-    
-    <section class="section">
-      <div class="container">
-        
-      </div>
-      <!-- Page d'accueil -->
-      <div class="columns menu">
-        <div class="column accueil-column">
-          <a href="./contents/statut-vehicule.html"><span class="button is-large">
-            <i class="fas fa-car fa-1x"></i>
-            <p>Statut véhicule</p>
-          </span></a>
-          <a href="./contents/liste-vehicule.html"><span class="button is-large">
-            <img src="./contents/ressources/images/choisir-un-vehicule.png" width="32px"/>
-            <p style="text-align: center;">Réserver un véhicule</p>
-          </span></a>
-          <a href="./contents/liste-statuts.html"><span class="button is-large btn-accueil">
-            <i class="fas fa-wrench fa-1x"></i>
-            <p>Gérer statuts</p>
-          </span></a>
-        </div>
-        <div class="column is-half is-centered is-center">
-          <img src="./contents/ressources/images/logo.png" height="100" style="image is-64x64">
-          <p>Bienvenue</p>
-          <div style="height:41%"></div>
-          <div class="columns">
-            <div class="column accueil-column">
-              
-              <a href="./contents/ajouter-utilisateur.html"><span class="button is-large btn-accueil">
-                <i class="fas fa-user-plus fa-1x"></i>
-                <p>Ajouter utilisateur</p>
-              </span></a>
-            </div>
-            <div class="column accueil-column">
-              <a href="./contents/liste-utilisateurs.html"> <span class="button is-large btn-accueil">
-                <i class="fas fa-users fa-1x"></i>
-                <p>Liste utilisateurs</p>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="column accueil-column">
-          <a href="./contents/liste-agence.html"><span class="button is-large">
-            <i class="fas fa-list fa-1x"></i>
-            <p>Gérer les agences</p>
-          </span></a>
+    <title>Socopec</title>
+    <link rel="icon"
+          type="image/ico"
+          href="{{thisURL}}images/favicon.ico">
+    <link rel="stylesheet" href="{{thisURL}}css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
 
-          <a href="./contents/liste-statuts.html"><span class="button is-large">
-            <i class="fas fa-wrench fa-1x"></i>
-            <p>Gérer statuts</p>
-          </span></a>
-          <a href="./contents/login.html"><span class="button is-large btn-accueil">
-            <i class="fas fa-unlock fa-1x"></i>
-            <p>Se déconnecter</p>
-          </span></a>
-        </div>
-      </div>
-    </section>
-    <!-- FOOTER -->
-    <footer class="footer has-text-centered">
-      <div class="container">
-
-      </div>
-    </footer>
-    <script type="text/javascript" src="lib/main.js"></script>
-  </body>
+<body>
+{{> header}}
+<div class="main-container">
+    {{{content}}}
+</div>
+<footer>
+    {{> footer}}
+</footer>
+</body>
+<script src="{{thisURL}}js/main.js"></script>
 </html>
