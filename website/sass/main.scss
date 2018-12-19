@@ -24,15 +24,18 @@ $primary-invert: $pink-invert;
 // 4. Import the rest of Bulma
 */
 @import "../../node_modules/bulma/bulma";
+/************** SASS ****************/
+
 /*$blue: #0000ff;*/
 
 /*Mettre "../" pour les liens dans le css car ça tombe sur "./css" */
 
 /*html {background-color: $black;}*/
 .hero-body {
-  background: url("../images/header.jpg");
+  /*background: url("../images/header.jpg");*/
   background-size: 100%;
   background-position: 0 -100px;
+  background: $white;
 }
 
 .footer {
@@ -63,12 +66,18 @@ $primary-invert: $pink-invert;
   white-space: initial;
 }
 
-.menu-interne .button {
+.menu-interne {
+ .button { 
   margin: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
   width: 100%;
   white-space: initial;
+  }
+  .button:hover{
+    background: $blue;
+    color: $white;
+  }
 }
 
 .button p {
@@ -87,7 +96,15 @@ $primary-invert: $pink-invert;
   justify-content: space-between;
   flex-direction: column;
   align-self: stretch;
+
+  .button:hover{
+    background: $blue;
+    color: $white;
+  }
+
 }
+
+
 
 .columns {
   margin: 0 !important;
