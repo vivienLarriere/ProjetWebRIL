@@ -9048,6 +9048,10 @@ label.panel-block:hover {
   margin-right: auto;
 }
 
+.is-large {
+  min-width: 250px;
+}
+
 .se-connecter {
   margin: 50px 0;
 }
