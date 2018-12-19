@@ -9,12 +9,13 @@
             <div class="column"><input class="input" placeholder="" type="text"></div>
         </div>
         <div class="columns ">
-            <div class="column"><p>Agence Afiliée</p></div>
+            <div class="column"><p>Agence Affiliée</p></div>
             <div class="column">
                 <div class="select">
                     <select>
-                        <option>Nantes</option>
-                        <option>Paris</option>
+                        {{#each agences}}
+                        <option value="{{this.AGENCE_ID}}">{{this.AGENCE_NOM}}</option>
+                        {{/each}}
                     </select>
                 </div>
             </div>
@@ -44,26 +45,26 @@
                 </div>
             </div>
         </div>
-        <div class="columns ">
-            <div class="column"><p>Photos</p></div>
-            <div class="column">
-                <div class="file has-name is-boxed">
-                    <label class="file-label">
-                        <input class="file-input" name="resume" type="file">
-                        <span class="file-cta">
-									<span class="file-icon">
-										<i class="fas fa-upload"></i>
-									</span>
-									<span class="file-label">
-										Choose a file…
-									</span>
-								</span>
-                        <span class="file-name">
-								</span>
-                    </label>
-                </div>
-            </div>
-        </div>
+        <!--   <div class="columns ">
+               <div class="column"><p>Photos</p></div>
+               <div class="column">
+                   <div class="file has-name is-boxed">
+                       <label class="file-label">
+                           <input class="file-input" name="resume" type="file">
+                           <span class="file-cta">
+                                       <span class="file-icon">
+                                           <i class="fas fa-upload"></i>
+                                       </span>
+                                       <span class="file-label">
+                                           Choose a file…
+                                       </span>
+                                   </span>
+                           <span class="file-name">
+                                   </span>
+                       </label>
+                   </div>
+               </div>
+           </div> -->
         <div class="columns ">
             <div class="column"><p>Identifiant</p></div>
             <div class="column"><input class="input" placeholder="" type="text"></div>
@@ -78,7 +79,6 @@
         </div>
         <div class="columns is-pulled-right">
             <div class="column 	">
-                <a class="button">Retour</a>
                 <a class="button">Valider</a>
             </div>
         </div>

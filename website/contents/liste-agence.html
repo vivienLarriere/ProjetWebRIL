@@ -11,12 +11,12 @@
               </span></a>
             </div>
             <div class="column">
-              <a href="./statut-vehicule.html"><span class="button is-medium">
+              <a href=".{{thisURL}}vehicules"><span class="button is-medium">
                 <i class="fas fa-car fa-2x"></i>
               </span></a>
             </div>
             <div class="column">
-              <a href="./liste-vehicule.html"><span class="button is-medium">
+              <a href="{{thisURL}}vehicules"><span class="button is-medium">
                 <img src="{{thisURL}}images/choisir-un-vehicule.png" width="32px"/>
               </span></a>
             </div>
@@ -60,21 +60,18 @@
                 <th>Adresse</th>
                 <th>Tél.</th>
                 <th>Fax</th>
-                <th>Options</th>
             </tr>
             </thead>
             <!-- Mettre balises pour les données de la DB -->
             <tbody>
-            <tr>
-            {{ #each agences}}
-                <td onclick="window.location.href = '{{thisURL}}agence/{{this.AGENCE_ID}}'">{{this.AGENCE_NOM}}</td>
-                <td onclick="window.location.href = '{{thisURL}}agence/{{this.AGENCE_ID}}'">{{this.AGENCE_ADRESSE}}</td>
-                <td onclick="window.location.href = '{{thisURL}}agence/{{this.AGENCE_ID}}'">{{this.AGENCE_TEL}}</td>
-                <td onclick="window.location.href = '{{thisURL}}agence/{{this.AGENCE_ID}}'">{{this.AGENCE_FAX}}</td>
-                <td><i class="fas fa-wrench fa-2x"></i><span style="width: 50px"> </span> <i
-                        class="fas fa-times fa-2x"></i></td>
-            {{/each}}
+            {{#each agences}}
+            <tr onclick="window.location.href = '{{thisURL}}agence/{{this.AGENCE_ID}}'">
+                <td>{{this.AGENCE_NOM}}</td>
+                <td>{{this.AGENCE_ADRESSE}}</td>
+                <td>{{this.AGENCE_TEL}}</td>
+                <td>{{this.AGENCE_FAX}}</td>
             </tr>
+            {{/each}}
             </tbody>
         </table>
     </div>

@@ -1,4 +1,5 @@
 "use strict";
+const Boom = require('boom');
 
 module.exports = [
 
@@ -27,8 +28,7 @@ module.exports = [
                     nb_vehicules: rows.length
                 });
             } catch (err) {
-                // Boom est un plugin permettant la gestion des erreurs de l'application
-                throw Boom.internal('Internal Mysql Error', err)
+                console.log(err);
             }
         }
     },
@@ -44,18 +44,14 @@ module.exports = [
             try {
                 // Notre requête
                 // La réponse est stocké automatiquement sous la forme d'un JSON dans la variable rows
-                const [rows] = await pool.query(`select * from vehicule LEFT JOIN statut on STATUT_ID = VEHICULE_ID_STATUT where VEHICULE_ID = ${request.params.vehicule_id};`);
-                const [rows2] = await pool.query(`select * from agence where AGENCE_ID = ${rows.VEHICULE_ID_AGENCE};`);
-
+                const [rows, fields] = await pool.query(`select * from vehicule LEFT JOIN statut ON STATUT_ID = VEHICULE_ID_STATUT LEFT JOIN agence ON AGENCE_ID = VEHICULE_ID_AGENCE where VEHICULE_ID = ${request.params.vehicule_id} GROUP BY VEHICULE_ID;`);
                 // On charge la vue 'front-page' avec nos données SQL
                 // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
                 return reply.view('statut-vehicule', {
                     vehicule: rows,
-                    agence: rows2
                 });
             } catch (err) {
-                // Boom est un plugin permettant la gestion des erreurs de l'application
-                throw Boom.internal('Internal Mysql Error', err)
+                console.log(err);
             }
         }
     },
@@ -77,8 +73,7 @@ module.exports = [
                 // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
                 return reply.view('info-vehicule', {vehicule: rows});
             } catch (err) {
-                // Boom est un plugin permettant la gestion des erreurs de l'application
-                throw Boom.internal('Internal Mysql Error', err)
+                console.log(err);
             }
         }
     },
@@ -96,10 +91,10 @@ module.exports = [
                 return reply.redirect('/vehicules');
             } catch (err) {
                 console.log(err);
-                throw Boom.internal('Internal Mysql Error', err)
             }
         }
     },
+
     {
         method: 'GET',
         path: '/vehicule/add',
@@ -116,7 +111,25 @@ module.exports = [
                 return reply.view('ajouter-vehicule', data);
             } catch (err) {
                 console.log(err);
-                throw Boom.internal('Internal Mysql Error', err)
+            }
+        }
+    },
+    {
+        method: 'GET',
+        path: '/vehicule/reserver',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            const pool = request.mysql.pool;
+            try {
+                const [rows] = await pool.query(`select * from agence`);
+                let data = {
+                    agences: rows
+                };
+                return reply.view('reserver-vehicule', data);
+            } catch (err) {
+                console.log(err);
             }
         }
     },
@@ -137,7 +150,7 @@ module.exports = [
                 const [rows] = await pool.query('select * from agence;');
                 return reply.view('liste-agence', {agences: rows});
             } catch (err) {
-                throw Boom.internal('Internal Mysql Error', err)
+                console.log(err);
             }
         }
     },
@@ -153,7 +166,7 @@ module.exports = [
                 const [rows] = await pool.query(`select * from agence where AGENCE_ID = ${request.params.id_agence};`);
                 return reply.view('statut-agence', {agences: rows});
             } catch (err) {
-                throw Boom.internal('Internal Mysql Error', err)
+                console.log(err);
             }
         }
     },
@@ -178,11 +191,11 @@ module.exports = [
             // On ouvre une requête à MySQL
             const pool = request.mysql.pool;
             try {
-                const [rows] = await pool.query(`insert into utilisateur (UTILISATEUR_IDENTIFIANT, UTILISATEUR_NOM, UTILISATEUR_PRENOM, UTILISATEUR_TEL, UTILISATEUR_FAX, UTILISATEUR_MOBILE, UTILISATEUR_PWD) VALUES ("${request.payload.identifiant}", "${request.payload.nom}", "${request.payload.prenom}", , "${request.payload.tel}"), "${request.payload.fax}", "${request.payload.mobile}", "${request.payload.pwd}";`);
-                return reply.redirect('/vehicules');
+                const [rows] = await pool.query(`insert into agence (\`AGENCE_NOM\`, \`AGENCE_NUM_ADRESSE\`, \`AGENCE_NOM_ADRESSE\`, \`AGENCE_MAIL\`, \`AGENCE_TEL\`, \`AGENCE_FAX\`, \`AGENCE_CP\`, \`AGENCE_VILLE\`)  VALUES ("${request.payload.nom}", "${request.payload.num_adresse}", "${request.payload.nom_adresse}", , "${request.payload.mail}"), "${request.payload.tel}", "${request.payload.fax}", "${request.payload.cp}", "${request.payload.ville}";`);
+                //  INSERT INTO `agence` (`AGENCE_ID`, `AGENCE_NOM`, `AGENCE_NUM_ADRESSE`, `AGENCE_NOM_ADRESSE`, `AGENCE_MAIL`, `AGENCE_TEL`, `AGENCE_FAX`, `AGENCE_ID_FICHIER`, `AGENCE_CP`, `AGENCE_VILLE`) VALUES (2, 'Trotro6', '56', 'Labas', 'toto@toto.fr', '0304056001', '0807090645', NULL, '55440', 'Lamarche');
+                return reply.redirect('/agences');
             } catch (err) {
                 console.log(err);
-                throw Boom.internal('Internal Mysql Error', err)
             }
         }
     },
@@ -219,6 +232,22 @@ module.exports = [
             return reply.view('creer-statut');
         }
     },
+    {
+        method: 'GET',
+        path: '/statuts',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            const pool = request.mysql.pool;
+            try {
+                const [rows] = await pool.query('select * from statut;');
+                return reply.view('liste-statuts', {statuts: rows});
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    },
 
 
     /*
@@ -247,7 +276,13 @@ module.exports = [
             auth: 'session'
         },
         async handler(request, reply) {
-            return reply.view('ajouter-utilisateur');
+            const pool = request.mysql.pool;
+            try {
+                const [rows] = await pool.query('select * from agence;');
+                return reply.view('ajouter-utilisateur', {agences: rows});
+            } catch (err) {
+                console.log(err);
+            }
         }
     },
     {
@@ -260,17 +295,12 @@ module.exports = [
             // On ouvre une requête à MySQL
             const pool = request.mysql.pool;
             try {
-                // Notre requête
-                // La réponse est stocké automatiquement sous la forme d'un JSON dans la variable rows
-                const [rows] = await pool.query('select * from utilisateur;');
-                // On charge la vue 'front-page' avec nos données SQL
-                // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
+                const [rows] = await pool.query('select * from utilisateur LEFT JOIN agence ON UTILISATEUR_ID_AGENCE = AGENCE_ID;');
                 return reply.view('liste-utilisateurs', {
                     utilisateurs: rows,
                 });
             } catch (err) {
-                // Boom est un plugin permettant la gestion des erreurs de l'application
-                throw Boom.internal('Internal Mysql Error', err)
+                console.log(err);
             }
         }
     },
@@ -284,16 +314,10 @@ module.exports = [
             // On ouvre une requête à MySQL
             const pool = request.mysql.pool;
             try {
-                // Notre requête
-                // La réponse est stocké automatiquement sous la forme d'un JSON dans la variable rows
                 const [rows] = await pool.query(`select * from utilisateur where UTILISATEUR_ID = ${request.params.utilisateur_id};`);
-
-                // On charge la vue 'front-page' avec nos données SQL
-                // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
                 return reply.view('info-utilisateur', {utilisateur: rows});
             } catch (err) {
-                // Boom est un plugin permettant la gestion des erreurs de l'application
-                throw Boom.internal('Internal Mysql Error', err)
+                console.log(err);
             }
         }
     },
@@ -311,7 +335,6 @@ module.exports = [
                 return reply.redirect('/vehicules');
             } catch (err) {
                 console.log(err);
-                throw Boom.internal('Internal Mysql Error', err)
             }
         }
     },

@@ -16,12 +16,12 @@
               </span></a>
             </div>
             <div class="column">
-              <a href="./liste-vehicule.html"><span class="button is-medium">
-                <img src="./ressources/images/choisir-un-vehicule.png" width="32px"/>
+              <a href="{{thisURL}}vehicules"><span class="button is-medium">
+                <img src="{{thisURL}}images/choisir-un-vehicule.png" width="32px"/>
               </span></a>
             </div>
             <div class="column">
-              <a href="./login.html"><span class="button is-medium">
+              <a href="{{thisURL}}logout"><span class="button is-medium">
                 <i class="fas fa-unlock fa-2x"></i>
               </span></a>
             </div>
@@ -31,11 +31,11 @@
         <div class="column is-one-fifth"></div>
             <!-- Titre page -->
         <div class="column is-one-fifth" style="text-align: right;">
-          <p>Liste véhicules</p>
+          <p>Liste utilisateurs</p>
         </div>
             <!-- LOGO -->
         <div class="column is-one-fifth">
-          <img src="./ressources/images/logo.png" width=""/>
+          <img src="{{thisURL}}images/logo.png" width=""/>
         </div>
       </div>
     </span>
@@ -43,13 +43,13 @@
     <div>
     </div>
     <!-- Barre de recherche rapide -->
-    <div class="columns recherche">
-        <div class="column"><input class="input" placeholder="Nom" type="text"></div>
-        <div class="column"><input class="input" placeholder="Prenom" type="text"></div>
-        <div class="column"><input class="input" placeholder="Téléphone" type="text"></div>
-        <div class="column"><input class="button" type="reset" value="Réinitialiser">
-            <input class="button" type="submit" value="Rechercher"></div>
-    </div>
+    <!--  <div class="columns recherche">
+          <div class="column"><input class="input" placeholder="Nom" type="text"></div>
+          <div class="column"><input class="input" placeholder="Prenom" type="text"></div>
+          <div class="column"><input class="input" placeholder="Téléphone" type="text"></div>
+          <div class="column"><input class="button" type="reset" value="Réinitialiser">
+              <input class="button" type="submit" value="Rechercher"></div>
+      </div> -->
     <!-- TABLEAU -->
     <div>
         <table class="table is-fullwidth">
@@ -60,20 +60,20 @@
                 <th>Télephone</th>
                 <th>Mobile</th>
                 <th>Identifiant</th>
-                <th>Options</th>
+                <th>Agence</th>
             </tr>
             </thead>
-            <!-- Mettre balises pour les données de la DB -->
             <tbody>
+            {{#each utilisateurs}}
             <tr>
-                <td>Bonfumé</td>
-                <td>Jean</td>
-                <td>01234567</td>
-                <td></td>
-                <td>bonfume-jean</td>
-                <td><i class="fas fa-wrench fa-2x"></i><span style="width: 50px"> </span> <i
-                        class="fas fa-times fa-2x"></i></td>
+                <td>{{this.UTILISATEUR_NOM}}</td>
+                <td>{{this.UTILISATEUR_PRENOM}}</td>
+                <td>{{this.UTILISATEUR_TEL}}</td>
+                <td>{{this.UTILISATEUR_MOBILE}}</td>
+                <td>{{this.UTILISATEUR_IDENTIFIANT}}</td>
+                <td>{{this.AGENCE_NOM}}</td>
             </tr>
+            {{/each}}
             </tbody>
         </table>
     </div>

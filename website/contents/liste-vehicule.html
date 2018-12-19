@@ -45,7 +45,8 @@
     </div>
     <!-- Barre de recherche rapide -->
     <div class="columns recherche">
-        <div class="column"><input class="button is-success" type="reset" value="Ajouter un véhicule"></div>
+        <div class="column"><input class="button is-success" onclick="window.location = '{{thisURL}}vehicule/add';"
+                                   type="reset" value="Ajouter un véhicule"></div>
         <div class="column"><input class="input" placeholder="Marque" type="text"></div>
         <div class="column"><input class="input" placeholder="Agence" type="text"></div>
         <div class="column"><input class="input" placeholder="Text input" type="text"></div>
@@ -67,27 +68,27 @@
             </thead>
             <!-- Mettre balises pour les données de la DB -->
             <tbody>
-            <tr>
-                {{#each vehicules}}
-                <td onclick="window.location.href = '{{thisURL}}vehicule/{{this.VEHICULE_ID}}'">
+            {{#each vehicules}}
+            <tr onclick="window.location.href = '{{thisURL}}vehicule/{{this.VEHICULE_ID}}'">
+                <td>
                     {{this.VEHICULE_MARQUE}}
                 </td>
-                <td onclick="window.location.href = '{{thisURL}}vehicule/{{this.VEHICULE_ID}}'">
+                <td>
                     {{this.VEHICULE_MODELE}}
                 </td>
-                <td onclick="window.location.href = '{{thisURL}}vehicule/{{this.VEHICULE_ID}}'">{{this.AGENCE_NOM}}</td>
-                <td onclick="window.location.href = '{{thisURL}}vehicule/{{this.VEHICULE_ID}}'"></td>
-                <td onclick="window.location.href = '{{thisURL}}vehicule/{{this.VEHICULE_ID}}'">
+                <td>{{this.AGENCE_NOM}}</td>
+                <td></td>
+                <td>
                     {{this.VEHICULE_MARQUE}}
                 </td>
-                <td onclick="window.location.href = '{{thisURL}}vehicule/{{this.VEHICULE_ID}}'">
+                <td>
                     {{this.VEHICULE_MARQUE}}
                 </td>
-                <td onclick="window.location.href = '{{thisURL}}vehicule/{{this.VEHICULE_ID}}'">
+                <td>
                     {{this.VEHICULE_MARQUE}}
                 </td>
-                {{/each}}
             </tr>
+            {{/each}}
             </tbody>
         </table>
     </div>
