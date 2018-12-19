@@ -78,20 +78,6 @@ const launchServer = async function () {
 
           server.route([
               {
-                  method : 'GET',
-                  path   : '/',
-                  options: {
-                      handler: function (request, h) {
-                          /*return '<html><head><title>Login page</title></head><body><h3>Welcome ' +
-                              request.auth.credentials.name +
-                              '!</h3><br/><form method="get" action="/logout">' +
-                              '<input type="submit" value="Logout">' +
-                              '</form></body></html>';*/
-                          return h.view('home');
-                      }
-                  }
-              },
-              {
                   method : ['POST'],
                   path   : '/login',
                   options: {
@@ -124,17 +110,6 @@ const launchServer = async function () {
                       }
                   }
               },
-              {
-                  method : 'GET',
-                  path   : '/logout',
-                  options: {
-                      handler: function (request, h) {
-                          //request.server.app.cache.drop(request.state['sid-example'].sid);
-                          request.cookieAuth.clear();
-                          return h.redirect('/');
-                      },
-                  }
-              }
 
           ]);
 
