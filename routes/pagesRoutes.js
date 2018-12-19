@@ -2,17 +2,6 @@
 
 module.exports = [
 
-    {
-        method : ['GET'],
-        path   : '/login',
-        options: {
-            auth   : false,
-            handler: async function (request, h) {
-                return h.view('login');
-            }
-        }
-
-    },
     /*
      ****************************
      ******** VEHICULES *********
@@ -20,7 +9,7 @@ module.exports = [
      */
     {
         method: 'GET',
-        path  : '/vehicules',
+        path: '/vehicules',
         config: {
             auth: 'session'
         },
@@ -31,14 +20,12 @@ module.exports = [
                 // Notre requête
                 // La réponse est stocké automatiquement sous la forme d'un JSON dans la variable rows
                 const [rows] = await pool.query('select * from vehicule;');
-
                 // On charge la vue 'front-page' avec nos données SQL
                 // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
-                let data = {
-                    vehicules   : rows,
+                return reply.view('liste-vehicule', {
+                    vehicules: rows,
                     nb_vehicules: rows.length
-                };
-                return reply.view('liste-vehicule', data);
+                });
             } catch (err) {
                 // Boom est un plugin permettant la gestion des erreurs de l'application
                 throw Boom.internal('Internal Mysql Error', err)
@@ -47,7 +34,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path  : '/vehicule/{vehicule_id}',
+        path: '/vehicule/{vehicule_id}',
         config: {
             auth: 'session'
         },
@@ -61,7 +48,7 @@ module.exports = [
 
                 // On charge la vue 'front-page' avec nos données SQL
                 // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
-                return reply.view('info-vehicule', {vehicule: rows});
+                return reply.view('statut-vehicule', {vehicule: rows});
             } catch (err) {
                 // Boom est un plugin permettant la gestion des erreurs de l'application
                 throw Boom.internal('Internal Mysql Error', err)
@@ -70,7 +57,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path  : '/vehicule/agence/{agence_id}',
+        path: '/vehicule/agence/{agence_id}',
         config: {
             auth: 'session'
         },
@@ -93,7 +80,7 @@ module.exports = [
     },
     {
         method: 'POST',
-        path  : '/vehicule/add',
+        path: '/vehicule/add',
         config: {
             auth: 'session'
         },
@@ -111,7 +98,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path  : '/vehicule/add',
+        path: '/vehicule/add',
         config: {
             auth: 'session'
         },
@@ -136,30 +123,39 @@ module.exports = [
      */
     {
         method: 'GET',
-        path  : '/agences',
+        path: '/agences',
         config: {
             auth: 'session'
         },
         async handler(request, reply) {
-            // On ouvre une requête à MySQL
             const pool = request.mysql.pool;
             try {
-                // Notre requête
-                // La réponse est stocké automatiquement sous la forme d'un JSON dans la variable rows
                 const [rows] = await pool.query('select * from agence;');
-
-                // On charge la vue 'front-page' avec nos données SQL
-                // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
-                return reply.view('front-page', {vehicule: rows});
+                return reply.view('liste-agence', {agences: rows});
             } catch (err) {
-                // Boom est un plugin permettant la gestion des erreurs de l'application
                 throw Boom.internal('Internal Mysql Error', err)
             }
         }
     },
     {
         method: 'GET',
-        path  : '/agence/add',
+        path: '/agence/{id_agence}',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            const pool = request.mysql.pool;
+            try {
+                const [rows] = await pool.query(`select * from agence where AGENCE_ID = ${request.params.id_agence};`);
+                return reply.view('statut-agence', {agences: rows});
+            } catch (err) {
+                throw Boom.internal('Internal Mysql Error', err)
+            }
+        }
+    },
+    {
+        method: 'GET',
+        path: '/agence/add',
         config: {
             auth: 'session'
         },
@@ -170,7 +166,7 @@ module.exports = [
 
     {
         method: 'POST',
-        path  : '/agence/add',
+        path: '/agence/add',
         config: {
             auth: 'session'
         },
@@ -209,7 +205,16 @@ module.exports = [
      ********* STATUT ***********
      ****************************
      */
-
+    {
+        method: 'GET',
+        path: '/statut/add',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            return reply.view('creer-statut');
+        }
+    },
 
 
     /*
@@ -231,6 +236,16 @@ module.exports = [
      ******* UTILISATEUR ********
      ****************************
      */
+    {
+        method: 'GET',
+        path: '/utilisateur/add',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            return reply.view('ajouter-utilisateur');
+        }
+    },
 
 
     /*
@@ -239,10 +254,42 @@ module.exports = [
      ****************************
      */
     {
-        method : 'GET',
-        path   : '/{path*}',
+        method: 'GET',
+        path: '/{path*}',
         handler: (request, reply) => {
             return reply.view('404').code(404)
         }
+    },
+
+    {
+        method: 'GET',
+        path: '/logout',
+        options: {
+            handler: function (request, h) {
+                //request.server.app.cache.drop(request.state['sid-example'].sid);
+                request.cookieAuth.clear();
+                return h.redirect('/');
+            },
+        }
+    },
+    {
+        method: 'GET',
+        path: '/',
+        options: {
+            handler: function (request, h) {
+                return h.view('home');
+            }
+        }
+    },
+    {
+        method: ['GET'],
+        path: '/login',
+        options: {
+            auth: false,
+            handler: async function (request, h) {
+                return h.view('login');
+            }
+        }
+
     }
 ];
