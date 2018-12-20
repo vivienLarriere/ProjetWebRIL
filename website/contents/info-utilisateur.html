@@ -37,8 +37,9 @@
 			</div>
 		</div>
 	</span>
+{{#each utilisateur}}
 <div>
-    <h1 class="title is-1">Infos Jean Bonfumé</h1>
+    <h1 class="title is-1">Infos {{this.UTILISATEUR_NOM}} {{this.UTILISATEUR_PRENOM}}</h1>
 </div>
 <HR size="5">
 <div class="is-divider"></div>
@@ -50,37 +51,31 @@
         <div class="columns descriptif">
             <div class="columns ">
                 <div class="column"><p>Nom</p></div>
-                <div class="column"><p>Bonfumé</p></div>
+                <div class="column"><p>{{this.UTILISATEUR_NOM}}</p></div>
             </div>
             <div class="columns ">
-                <div class="column"><p>Prenom</p></div>
-                <div class="column"><p>Jean</p></div>
+                <div class="column"><p>Prénom</p></div>
+                <div class="column"><p>{{this.UTILISATEUR_PRENOM}}</p></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Téléphone</p></div>
-                <div class="column"><p>01234567</p></div>
+                <div class="column"><p>{{this.UTILISATEUR_TEL}}</p></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Mobile</p></div>
-                <div class="column"><p></p></div>
+                <div class="column"><p>{{this.UTILISATEUR_MOBILE}}</p></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Agence</p></div>
-                <div class="column"><p>Nantes</p></div>
+                <div class="column"><p>{{this.AGENCE_NOM}}</p></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Identifiant</p></div>
-                <div class="column"><p>bonfume-jean</p></div>
+                <div class="column"><p>{{this.UTILISATEUR_IDENTIFIANT}}</p></div>
             </div>
             <div class="columns "></div>
         </div>
         <div class="column"></div>
     </div>
 </div>
-</div>
-<div class="is-divider" data-content=""></div>
-<hr>
-<div class="buttons is-pulled-right	">
-    <a class="button">Fermer</a>
-
-</div>
+{{/each}}

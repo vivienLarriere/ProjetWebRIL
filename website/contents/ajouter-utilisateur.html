@@ -38,7 +38,7 @@
 		</div>
 	</span>
 <!-- Page permettant d'ajouter un nouvel utilisateur -->
-<form>
+<form method="post" action="{{thisURL}}utilisateur/add">
     <div class="columns descriptif">
         <div class="column">
             <div class="columns">
@@ -54,7 +54,7 @@
                 <div class="column">
                     <!-- Mettre les balises pour les différentes agences -->
                     <div class="select">
-                        <select name="agence">
+                        <select name="id_agence">
                             {{#each agences}}
                             <option value="{{this.AGENCE_ID}}">{{this.AGENCE_NOM}}</option>
                             {{/each}}
@@ -73,19 +73,6 @@
             <div class="columns ">
                 <div class="column"><p>Fax</p></div>
                 <div class="column"><input name="fax" class="input" placeholder="" type="tel"></div>
-            </div>
-            <div class="columns " style="display: none;">
-                <div class="column"><p>Adresse</p></div>
-                <div class="column">
-                    <div class="columns">
-                        <div class="column is-one-fifth"><input class="input" placeholder="N°" type="text"></div>
-                        <div class="column"><input class="input" placeholder="Rue/Avenue/Impasse" type="text"></div>
-                    </div>
-                    <div class="columns">
-                        <div class="column is-one-fifth"><input class="input" placeholder="cpt." type="text"></div>
-                        <div class="column"><input class="input" placeholder="Ville" type="text"></div>
-                    </div>
-                </div>
             </div>
             <!--   <div class="columns ">
                    <div class="column"><p>Photos</p></div>

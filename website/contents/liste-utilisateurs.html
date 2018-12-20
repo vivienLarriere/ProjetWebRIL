@@ -65,7 +65,7 @@
             </thead>
             <tbody>
             {{#each utilisateurs}}
-            <tr>
+            <tr onclick="window.location='{{thisURL}}utilisateur/{{this.UTILISATEUR_ID}}';">
                 <td>{{this.UTILISATEUR_NOM}}</td>
                 <td>{{this.UTILISATEUR_PRENOM}}</td>
                 <td>{{this.UTILISATEUR_TEL}}</td>

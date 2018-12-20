@@ -333,6 +333,24 @@ module.exports = [
         }
     },
     {
+        method: 'POST',
+        path: '/utilisateur/add',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            const pool = request.mysql.pool;
+            try {
+                let query = `INSERT INTO utilisateur (\`UTILISATEUR_IDENTIFIANT\`, \`UTILISATEUR_NOM\`, \`UTILISATEUR_PRENOM\`, \`UTILISATEUR_TEL\`, \`UTILISATEUR_FAX\`, \`UTILISATEUR_MOBILE\`, \`UTILISATEUR_ID_AGENCE\`, \`UTILISATEUR_PWD\`) values ("${request.payload.identifiant}", "${request.payload.nom}", "${request.payload.prenom}", "${request.payload.tel}", "${request.payload.fax}", "${request.payload.mobile}", "${request.payload.id_agence}", "${request.payload.num_adresse}");`;
+                await pool.query(query);
+                const [rows] = await pool.query('select * from utilisateur LEFT JOIN agence ON UTILISATEUR_ID_AGENCE = AGENCE_ID;');
+                return reply.view('liste-utilisateurs', {utilisateurs: rows});
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    },
+    {
         method: 'GET',
         path: '/utilisateurs',
         config: {
@@ -361,7 +379,7 @@ module.exports = [
             // On ouvre une requête à MySQL
             const pool = request.mysql.pool;
             try {
-                const [rows] = await pool.query(`select * from utilisateur where UTILISATEUR_ID = ${request.params.utilisateur_id};`);
+                const [rows] = await pool.query(`select * from utilisateur LEFT JOIN agence ON AGENCE_ID = UTILISATEUR_ID_AGENCE where UTILISATEUR_ID = ${request.params.utilisateur_id};`);
                 return reply.view('info-utilisateur', {utilisateur: rows});
             } catch (err) {
                 console.log(err);
