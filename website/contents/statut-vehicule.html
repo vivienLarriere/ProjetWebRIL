@@ -17,11 +17,13 @@
             </div>
             <div class="columns ">
                 <div class="column"><p>Agence Affiliée</p></div>
-                <div onclick="window.location = '{{thisURL}}agence/{{agence.AGENCE_ID}}';" class="column"><p>{{this.AGENCE_NOM}}</p></div>
+                <div onclick="window.location = '{{thisURL}}agence/{{agence.AGENCE_ID}}';" class="column"><p>
+                    {{this.AGENCE_NOM}}</p></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Dimensions</p></div>
-                <div class="column"><p>{{this.VEHICULE_HAUTEUR}} x {{this.VEHICULE_LONGUEUR}} x {{this.VEHICULE_LARGEUR}}</p></div>
+                <div class="column"><p>{{this.VEHICULE_HAUTEUR}} x {{this.VEHICULE_LONGUEUR}} x
+                    {{this.VEHICULE_LARGEUR}}</p></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Poids</p></div>
@@ -46,11 +48,11 @@
 </div>
 <div class="is-divider" data-content=""></div>
 <hr>
-<div class="buttons is-pulled-right	">
-    {{#if this.VEHICULE_STATUT_ID === 1}}
-    <a class="button" href="{{thisURL}}vehicule/retour/{{this.VEHICULE_ID}}">Signaler Retour</a>
-    {{#else}}
-    <a class="button" href="{{thisURL}}vehicule/reserver/{{this.VEHICULE_ID}}">Réserver</a>
-    {{/if}}
+<div class="buttons">
+    <a class="button is-info" href="{{thisURL}}vehicule/retour/{{this.VEHICULE_ID}}">Signaler Retour</a>
+    <a class="button is-primary" href="{{thisURL}}vehicule/reserver/{{this.VEHICULE_ID}}">Réserver</a>
 </div>
+<br/>
+<br/>
+<br/>
 {{/each}}
