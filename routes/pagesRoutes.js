@@ -1,6 +1,4 @@
 "use strict";
-const Boom = require('boom');
-
 module.exports = [
 
     /*
@@ -138,14 +136,14 @@ module.exports = [
 
     {
         method: 'GET',
-        path: '/vehicule/retour',
+        path: '/vehicule/retour/{vehicule_id}',
         config: {
             auth: 'session'
         },
         async handler(request, reply) {
             const pool = request.mysql.pool;
             try {
-                const [rows] = await pool.query(`select * from vehicules`);
+                const [rows] = await pool.query(`select * from vehicule LEFT JOIN agence ON AGENCE_ID = VEHICULE_ID_AGENCE where VEHICULE_ID = ${request.params.vehicule_id} GROUP BY VEHICULE_ID`);
                 let data = {
                     vehicules: rows
                 };
@@ -167,7 +165,29 @@ module.exports = [
                 const [rows2] = await pool.query(`UPDATE vehicule SET VEHICULE_DATE_FIN_PRET = "${request.payload.date_fin_pret}", VEHICULE_DATE_DEBUT_PRET = "${request.payload.date_debut_pret}", VEHICULE_ID_STATUT = 2 WHERE VEHICULE_ID = ${request.params.vehicule_id}`);
                 const [rows] = await pool.query('select * from vehicule LEFT JOIN agence ON VEHICULE_ID_AGENCE = AGENCE_ID LEFT JOIN statut ON VEHICULE_ID_STATUT = STATUT_ID;');
                 let data = {
-                    vehicules: rows
+                    vehicules: rows,
+                    nb_vehicules: rows.length
+                };
+                return reply.view('liste-vehicule', data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    },
+    {
+        method: 'POST',
+        path: '/vehicule/retour/{vehicule_id}',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            const pool = request.mysql.pool;
+            try {
+                await pool.query(`UPDATE vehicule SET VEHICULE_ID_STATUT = 1, VEHICULE_DATE_FIN_PRET = "", VEHICULE_DATE_DEBUT_PRET = "" WHERE VEHICULE_ID = ${request.params.vehicule_id}`);
+                const [rows] = await pool.query('select * from vehicule LEFT JOIN agence ON VEHICULE_ID_AGENCE = AGENCE_ID LEFT JOIN statut ON VEHICULE_ID_STATUT = STATUT_ID;');
+                let data = {
+                    vehicules: rows,
+                    nb_vehicules: rows.length
                 };
                 return reply.view('liste-vehicule', data);
             } catch (err) {
@@ -291,20 +311,6 @@ module.exports = [
         }
     },
 
-
-    /*
-     ****************************
-     ********** TICKET **********
-     ****************************
-     */
-
-    /*
-     ****************************
-     ******** TYPE HISTO ********
-     ****************************
-     */
-
-
     /*
      ****************************
      ******* UTILISATEUR ********
@@ -357,23 +363,6 @@ module.exports = [
             try {
                 const [rows] = await pool.query(`select * from utilisateur where UTILISATEUR_ID = ${request.params.utilisateur_id};`);
                 return reply.view('info-utilisateur', {utilisateur: rows});
-            } catch (err) {
-                console.log(err);
-            }
-        }
-    },
-    {
-        method: 'POST',
-        path: '/utilisateur/add',
-        config: {
-            auth: 'session'
-        },
-        async handler(request, reply) {
-            // On ouvre une requête à MySQL
-            const pool = request.mysql.pool;
-            try {
-                const [rows] = await pool.query(`insert into utilisateur (UTILISATEUR_IDENTIFIANT, UTILISATEUR_NOM, UTILISATEUR_PRENOM, UTILISATEUR_TEL, UTILISATEUR_FAX, UTILISATEUR_MOBILE, UTILISATEUR_PWD) VALUES ("${request.payload.identifiant}", "${request.payload.nom}", "${request.payload.prenom}", , "${request.payload.tel}"), "${request.payload.fax}", "${request.payload.mobile}", "${request.payload.pwd}";`);
-                return reply.redirect('/vehicules');
             } catch (err) {
                 console.log(err);
             }
