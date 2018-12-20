@@ -1,43 +1,4 @@
-<!-- menu-->
-<span class="menu-interne">
-			<div class="columns">
-			<div class="column is-one-third">
-				<div class="columns">
-					<div class="column ">
-						<a href="{{thisURL}}"><span class="button is-medium">
-							<i class="fas fa-home fa-2x"></i>
-						</span></a>
-					</div>
-					<div class="column">
-						<a href="{{thisURL}}statut"><span class="button is-medium">
-							<i class="fas fa-car fa-2x"></i>
-						</span></a>
-					</div>
-					<div class="column">
-						<a href="{{thisURL}}vehicules"><span class="button is-medium">
-							<img src="{{thisURL}}images/choisir-un-vehicule.png" width="32px"/>
-						</span></a>
-					</div>
-					<div class="column">
-						<a href="{{thisURL}}logout"><span class="button is-medium">
-							<i class="fas fa-unlock fa-2x"></i>
-						</span></a>
-					</div>
-                    </di>
-				</div>
-			</div>
-			<div class="column is-one-fifth"></div>
-                <!-- Titre page -->
-			<div class="column is-one-fifth" style="text-align: right;">
-				<p>Socopec Entretien</p>
-			</div>
-                <!-- LOGO -->
-			<div class="column is-one-fifth">
-				<a href="{{thisURL}}"> <img src="{{thisURL}}images/logo.png" width=""/></a>
-			</div>
-		</div>
-	</span>
-<form>
+<form action="{{thisURL}}agence/add" method="post">
     <span class="menu-interne">
         <div class="columns">
             <!-- menu-->
@@ -69,7 +30,7 @@
             <div class="column is-one-fifth"></div>
             <!-- Titre page -->
             <div class="column is-one-fifth">
-                <p>Ajouter une agence</p>
+                <h1>Ajouter une agence</h1>
             </div>
             <!-- LOGO -->
             <div class="column is-one-fifth">
@@ -81,60 +42,38 @@
         <div class="column">
             <div class="columns ">
                 <div class="column"><p>Ville</p></div>
-                <div class="column"><input class="input" name="ville" type="text" placeholder=""></div>
+                <div class="column"><input class="input" name="ville" placeholder="" type="text"></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Adresse</p></div>
                 <div class="column">
-                    <input class="input" name="num_adresse" type="text" placeholder="N°">
+                    <input class="input" name="num_adresse" placeholder="N°" type="text">
                     &nbsp;
-                    <input class="input" name="nom_adresse" type="text" placeholder="Rue/Avenue/Impasse">
+                    <input class="input" name="nom_adresse" placeholder="Rue/Avenue/Impasse" type="text">
                     &nbsp;
-                    <input class="input" name="cp" type="text" placeholder="cpt.">
+                    <input class="input" name="cp" placeholder="cpt." type="text">
                     &nbsp;
-                    <input class="input" name="ville" type="text" placeholder="Ville">
+                    <input class="input" name="ville" placeholder="Ville" type="text">
                 </div>
             </div>
         </div>
         <div class="columns is-pulled-right">
             <div class="column 	">
-                <a class="button">Valider</a>
                 <div class="columns ">
                     <div class="column"><p>Télephone</p></div>
-                    <div class="column"><input class="input" name="tel" type="text" placeholder=""></div>
+                    <div class="column"><input class="input" name="tel" placeholder="" type="text"></div>
                 </div>
                 <div class="columns ">
                     <div class="column"><p>Fax</p></div>
-                    <div class="column"><input class="input" name="fax" type="text" placeholder=""></div>
+                    <div class="column"><input class="input" name="fax" placeholder="" type="text"></div>
                 </div>
                 <div class="columns ">
                     <div class="column"><p>Adresse mail agence</p></div>
-                    <div class="column"><input class="input" name="mail" type="text" placeholder=""></div>
-                </div>
-                <div class="columns ">
-                    <div class="column"><p>Photos</p></div>
-                    <div class="column">
-                        <div class="file has-name is-boxed">
-                            <label class="file-label">
-                                <input class="file-input" type="file" name="resume">
-                                <span class="file-cta">
-                                <span class="file-icon">
-                                    <i class="fas fa-upload"></i>
-                                </span>
-                                <span class="file-label">
-                                    Choisir des photos
-                                </span>
-                            </span>
-                                <span class="file-name">
-                            </span>
-                            </label>
-                        </div>
-                    </div>
+                    <div class="column"><input class="input" name="mail" placeholder="" type="text"></div>
                 </div>
                 <div class="columns is-pulled-right">
                     <div class="column  ">
-                        <a class="button">Retour</a>
-                        <input type="submit" value="Valider" name="" class="button">Valider</a>
+                        <input class="button" name="" type="submit" value="Valider"></a>
                     </div>
                 </div>
             </div>

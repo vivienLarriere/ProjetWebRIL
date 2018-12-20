@@ -226,7 +226,7 @@ module.exports = [
             const pool = request.mysql.pool;
             try {
                 const [rows] = await pool.query(`select * from agence where AGENCE_ID = ${request.params.id_agence};`);
-                return reply.view('statut-agence', {agences: rows});
+                return reply.view('info-agence', {agences: rows});
             } catch (err) {
                 console.log(err);
             }
@@ -253,7 +253,9 @@ module.exports = [
             // On ouvre une requête à MySQL
             const pool = request.mysql.pool;
             try {
-                const [rows] = await pool.query(`insert into agence (\`AGENCE_NOM\`, \`AGENCE_NUM_ADRESSE\`, \`AGENCE_NOM_ADRESSE\`, \`AGENCE_MAIL\`, \`AGENCE_TEL\`, \`AGENCE_FAX\`, \`AGENCE_CP\`, \`AGENCE_VILLE\`)  VALUES ("${request.payload.nom}", "${request.payload.num_adresse}", "${request.payload.nom_adresse}", , "${request.payload.mail}"), "${request.payload.tel}", "${request.payload.fax}", "${request.payload.cp}", "${request.payload.ville}";`);
+                let query = `insert into agence (\`AGENCE_NOM\`, \`AGENCE_NUM_ADRESSE\`, \`AGENCE_NOM_ADRESSE\`, \`AGENCE_MAIL\`, \`AGENCE_TEL\`, \`AGENCE_FAX\`, \`AGENCE_CP\`, \`AGENCE_VILLE\`)  VALUES ("${request.payload.nom}", "${request.payload.num_adresse}", "${request.payload.nom_adresse}", "${request.payload.mail}", "${request.payload.tel}", "${request.payload.fax}", "${request.payload.cp}", "${request.payload.ville}");`;
+                console.log(query);
+                await pool.query(query);
                 //  INSERT INTO `agence` (`AGENCE_ID`, `AGENCE_NOM`, `AGENCE_NUM_ADRESSE`, `AGENCE_NOM_ADRESSE`, `AGENCE_MAIL`, `AGENCE_TEL`, `AGENCE_FAX`, `AGENCE_ID_FICHIER`, `AGENCE_CP`, `AGENCE_VILLE`) VALUES (2, 'Trotro6', '56', 'Labas', 'toto@toto.fr', '0304056001', '0807090645', NULL, '55440', 'Lamarche');
                 return reply.redirect('/agences');
             } catch (err) {
