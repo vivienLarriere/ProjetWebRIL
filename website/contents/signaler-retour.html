@@ -71,31 +71,31 @@
 			</div>
 			<div class="columns ">
 				<div class="column"><p>Date de retour réel</p></div>
-				<div class="column"><input class="input" type="text" placeholder="JJ/MM/AAAA"></div>
+				<div class="column"><input class="input" name="date_retour" type="text" placeholder="JJ/MM/AAAA"></div>
 			</div>
 			<div class="columns ">
 				<div class="column"><p>Problemes rencontrés</p></div>
 				<div class="column">
 					<div class="control">
 						<label class="radio">
-							<input type="radio" name="answer">
-							Yes
+							<input name="pb_oui" type="radio" name="answer">
+							Oui
 						</label>
-						<label class="radio">
+						<label name="pb_non" class="radio">
 							<input type="radio" name="answer">
-							No
+							Non
 						</label>
 					</div>
 				</div>
 			</div>
 			<div class="columns ">
 				<div class="column"><p>Objet</p></div>
-				<div class="column"><input class="input" type="text" placeholder=""></div>
+				<div class="column"><input name="pb_objet" class="input" type="text" placeholder=""></div>
 			</div>
 			<div class="columns ">
 				<div class="column"><p>Description</p></div>
 				<div class="column">
-					<textarea class="textarea" placeholder="e.g. Hello world"></textarea>
+					<input type="textarea" name="pb_description" class="textarea" placeholder="Décrivez votre problème">
 				</div>
 			</div>
 			<div class="columns is-pulled-right">

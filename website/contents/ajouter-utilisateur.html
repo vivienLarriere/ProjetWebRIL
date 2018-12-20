@@ -1,18 +1,21 @@
+<!-- Page permettant d'ajouter un nouvel utilisateur -->
+<form>
 <div class="columns descriptif">
     <div class="column">
         <div class="columns">
             <div class="column"><p>Nom</p></div>
-            <div class="column"><input class="input" placeholder="" type="text"></div>
+            <div class="column"><input name="nom" class="input" placeholder="" type="text"></div>
         </div>
         <div class="columns ">
             <div class="column"><p>Prénom</p></div>
-            <div class="column"><input class="input" placeholder="" type="text"></div>
+            <div class="column"><input name="prenom" class="input" placeholder="" type="text"></div>
         </div>
         <div class="columns ">
             <div class="column"><p>Agence Affiliée</p></div>
             <div class="column">
+                <!-- Mettre les balises pour les différentes agences -->
                 <div class="select">
-                    <select>
+                    <select name="agence">
                         {{#each agences}}
                         <option value="{{this.AGENCE_ID}}">{{this.AGENCE_NOM}}</option>
                         {{/each}}
@@ -22,17 +25,17 @@
         </div>
         <div class="columns ">
             <div class="column"><p>Télephone</p></div>
-            <div class="column"><input class="input" placeholder="" type="tel"></div>
+            <div class="column"><input  name="tel" class="input" placeholder="" type="tel"></div>
         </div>
         <div class="columns ">
             <div class="column"><p>Mobile</p></div>
-            <div class="column"><input class="input" placeholder="" type="tel"></div>
+            <div class="column"><input  name="mobile" class="input" placeholder="" type="tel"></div>
         </div>
         <div class="columns ">
             <div class="column"><p>Fax</p></div>
-            <div class="column"><input class="input" placeholder="" type="tel"></div>
+            <div class="column"><input  name="fax" class="input" placeholder="" type="tel"></div>
         </div>
-        <div class="columns ">
+        <div class="columns " style="display: none;">
             <div class="column"><p>Adresse</p></div>
             <div class="column">
                 <div class="columns">
@@ -67,20 +70,22 @@
            </div> -->
         <div class="columns ">
             <div class="column"><p>Identifiant</p></div>
-            <div class="column"><input class="input" placeholder="" type="text"></div>
+            <div class="column"><input  name="id" class="input" placeholder="" type="text"></div>
         </div>
         <div class="columns ">
             <div class="column"><p>Mot de passe</p></div>
-            <div class="column"><input class="input" placeholder="" type="text"></div>
+            <div class="column"><input  name="pwd" class="input" placeholder="" type="text"></div>
         </div>
         <div class="columns ">
             <div class="column"><p>Confirmer mot de passe</p></div>
-            <div class="column"><input class="input" placeholder="" type="text"></div>
+            <div class="column"><input  name="confirm_pwd" class="input" placeholder="" type="text"></div>
         </div>
         <div class="columns is-pulled-right">
             <div class="column 	">
-                <a class="button">Valider</a>
+                <a href="javascript:history.go(-1)" class="button">Retour</a>
+                <input type="submit" class="button" value="Valider">
             </div>
         </div>
     </div>
 </div>
+</form>
