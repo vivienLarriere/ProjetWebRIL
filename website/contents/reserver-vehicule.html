@@ -1,48 +1,46 @@
-<div class="columns descriptif">
-    <div class="column">
-        <div class="columns ">
-            <div class="column"><p>Marque</p></div>
-            <div class="column">Kärcher</div>
-        </div>
-        <div class="columns ">
-            <div class="column"><p>Modèle</p></div>
-            <div class="column">MC 130</div>
-        </div>
-        <div class="columns ">
-            <div class="column"><p>Agence Afiliée</p></div>
-            <div class="column">
-                <div class="select">
-                    <select>
-                        <option>Nantes</option>
-                        <option>Paris</option>
-                    </select>
-                </div>
+{{#each vehicules}}
+<form action="{{thisURL}}vehicule/reserver/{{this.VEHICULE_ID}}" method="post">
+    <div class="columns descriptif">
+        <div class="column">
+            <div class="columns ">
+                <div class="column"><p>Marque</p></div>
+                <div class="column">{{this.VEHICULE_MARQUE}}</div>
             </div>
-        </div>
-        <div class="columns ">
-            <div class="column"><p>Date de début de réservation</p></div>
-            <div class="column"><input type="date"></div>
-        </div>
+            <div class="columns ">
+                <div class="column"><p>Modèle</p></div>
+                <div class="column">{{this.VEHICULE_MODELE}}</div>
+            </div>
+            <div class="columns ">
+                <div class="column"><p>Agence Afiliée</p></div>
+                <div class="column">{{this.AGENCE_NOM}}</div>
 
-        <div class="columns ">
-            <div class="column"><p>Date de fin de réservation</p></div>
-            <div class="column"><input type="date"></div>
-        </div>
-        <div class="columns ">
-            <div class="column"><p>Raison de la réservation</p></div>
-            <div class="column">
-                <div class="select">
-                    <select>
-                        <option>Location</option>
-                        <option>Demonstration</option>
-                    </select>
-                </div>
             </div>
-        </div>
-        <div class="columns is-pulled-right">
-            <div class="column 	">
-                <a class="button">Valider</a>
+            <div class="columns ">
+                <div class="column"><p>Date de début de réservation</p></div>
+                <div class="column"><input name="date_debut_pret" type="date"></div>
+            </div>
+
+            <div class="columns ">
+                <div class="column"><p>Date de fin de réservation</p></div>
+                <div class="column"><input name="date_fin_pret" type="date"></div>
+            </div>
+            <!-- <div class="columns ">
+                <div class="column"><p>Raison de la réservation</p></div>
+                <div class="column">
+                    <div class="select">
+                        <select>
+                            <option>Location</option>
+                            <option>Demonstration</option>
+                        </select>
+                    </div>
+                </div>
+            </div> -->
+            <div class="columns is-pulled-right">
+                <div class="column 	">
+                    <button type="submit" class="button">Valider</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
+{{/each}}

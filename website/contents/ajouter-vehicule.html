@@ -1,72 +1,75 @@
-
-<div class="columns descriptif">
-    <div class="column">
-        <div class="columns ">
-            <div class="column"><p>Marque</p></div>
-            <div class="column"><input class="input" name="marque" type="text" placeholder=""></div>
-        </div>
-        <div class="columns ">
-            <div class="column"><p>Modèle</p></div>
-            <div class="column"><input class="input" name="modele" type="text" placeholder=""></div>
-        </div>
-        <div class="columns ">
-            <div class="column"><p>Agence Affiliée</p></div>
-            <div class="column">
-                <div class="select">
-                    <select>
-                        {{#each agences}}
-                        <option value="{{this.AGENCE_ID}}">{{this.AGENCE_NOM}}</option>
-                        {{/each}}
-                    </select>
+<form action="{{thisURL}}vehicule/add" method="post">
+    <div class="columns descriptif">
+        <div class="column">
+            <div class="columns ">
+                <div class="column"><p>Marque</p></div>
+                <div class="column"><input class="input" name="marque" placeholder="" type="text"></div>
+            </div>
+            <div class="columns ">
+                <div class="column"><p>Modèle</p></div>
+                <div class="column"><input class="input" name="modele" placeholder="" type="text"></div>
+            </div>
+            <div class="columns ">
+                <div class="column"><p>Agence Affiliée</p></div>
+                <div class="column">
+                    <div class="select">
+                        <select name="id_agence">
+                            {{#each agences}}
+                            <option value="{{this.AGENCE_ID}}">{{this.AGENCE_NOM}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="columns ">
-            <div class="column"><p>Dimensions</p></div>
-            <div class="column">
-                <div class="columns dimensions">
-                    <div class="column"><input name="longueur" class="input" type="text" placeholder="Longueur"></div>
-                    <div class="column"><input name="largeur" class="input" type="text" placeholder="Largeur"></div>
-                    <div class="column"><input name="hauteur" class="input" type="text" placeholder="Hauteur"></div>
+            <div class="columns ">
+                <div class="column"><p>Dimensions</p></div>
+                <div class="column">
+                    <div class="columns dimensions">
+                        <div class="column"><input class="input" name="longueur" placeholder="Longueur" type="text">
+                        </div>
+                        <div class="column"><input class="input" name="largeur" placeholder="Largeur" type="text"></div>
+                        <div class="column"><input class="input" name="hauteur" placeholder="Hauteur" type="text"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="columns ">
-            <div class="column"><p>Poids (Kg)</p></div>
-            <div class="column"><input name="poids" class="input" type="text" placeholder=""></div>
-        </div>
-        <div class="columns ">
-            <div class="column"><p>Puissance (CV)</p></div>
-            <div class="column"><input name="puissance" class="input" type="text" placeholder=""></div>
-        </div>
-        <div class="columns ">
-            <div class="column"><p>Date de création</p></div>
-            <div class="column"><input name="date_fabrication" class="input" type="text" placeholder="JJ/MM/AAAA"></div>
-        </div>
-        <!--  <div class="columns ">
-              <div class="column"><p>Photos</p></div>
-              <div class="column">
-                  <div class="file has-name is-boxed">
-                      <label class="file-label">
-                          <input class="file-input" type="file" name="resume">
-                          <span class="file-cta">
-                                  <span class="file-icon">
-                                      <i class="fas fa-upload"></i>
+            <div class="columns ">
+                <div class="column"><p>Poids (Kg)</p></div>
+                <div class="column"><input class="input" name="poids" placeholder="" type="text"></div>
+            </div>
+            <div class="columns ">
+                <div class="column"><p>Puissance (CV)</p></div>
+                <div class="column"><input class="input" name="puissance" placeholder="" type="text"></div>
+            </div>
+            <div class="columns ">
+                <div class="column"><p>Date de création</p></div>
+                <div class="column"><input class="input" name="date_fabrication" placeholder="JJ/MM/AAAA" type="text">
+                </div>
+            </div>
+            <!--  <div class="columns ">
+                  <div class="column"><p>Photos</p></div>
+                  <div class="column">
+                      <div class="file has-name is-boxed">
+                          <label class="file-label">
+                              <input class="file-input" type="file" name="resume">
+                              <span class="file-cta">
+                                      <span class="file-icon">
+                                          <i class="fas fa-upload"></i>
+                                      </span>
+                                      <span class="file-label">
+                                          Choose a file…
+                                      </span>
                                   </span>
-                                  <span class="file-label">
-                                      Choose a file…
+                              <span class="file-name">
                                   </span>
-                              </span>
-                          <span class="file-name">
-                              </span>
-                      </label>
+                          </label>
+                      </div>
                   </div>
-              </div>
-          </div> -->
-        <div class="columns is-pulled-right">
-            <div class="column">
-                <a class="button is-success is-medium">Valider</a>
+              </div> -->
+            <div class="columns is-pulled-right">
+                <div class="column">
+                    <input type="submit" class="button is-success is-medium">Valider</input>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>

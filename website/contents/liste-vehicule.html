@@ -13,7 +13,7 @@
             <div class="column"><input class="button" type="submit" value="Rechercher"></div>
             <div class="column"><input class="input" placeholder="Statut" type="text"></div>
         </div>
-        <p>Il y a {{nb_vehicules}} véhicules disponibles</p>
+        <p>{{nb_vehicules}} véhicules</p>
         <!-- Indiquer nb véhicules dispo - Module nb véhicules -->
         <div>
 
@@ -22,7 +22,6 @@
                 <!-- Mettre balises pour les données de la DB -->
                 <thead>
                 <th>Statut</th>
-                <th>Date de retour</th>
                 <th>Date de Prêt</th>
                 <th>Agence</th>
                 <th>Modéle</th>
@@ -32,18 +31,12 @@
                 {{#each vehicules}}
                 <tr onclick="window.location.href = '{{thisURL}}vehicule/{{this.VEHICULE_ID}}'">
                     <td>
-                        {{this.VEHICULE_MARQUE}}
+                        {{this.STATUT_LIB}}
                     </td>
+                    <td>{{this.VEHICULE_DATE_DERNIER_PRET}}</td>
+                    <td>{{this.AGENCE_NOM}}</td>
                     <td>
                         {{this.VEHICULE_MODELE}}
-                    </td>
-                    <td>{{this.AGENCE_NOM}}</td>
-                    <td></td>
-                    <td>
-                        {{this.VEHICULE_MARQUE}}
-                    </td>
-                    <td>
-                        {{this.VEHICULE_MARQUE}}
                     </td>
                     <td>
                         {{this.VEHICULE_MARQUE}}
