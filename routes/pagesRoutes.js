@@ -10,7 +10,7 @@ module.exports = [
      */
     {
         method: 'GET',
-        path: '/vehicules',
+        path  : '/vehicules',
         config: {
             auth: 'session'
         },
@@ -24,7 +24,7 @@ module.exports = [
                 // On charge la vue 'front-page' avec nos données SQL
                 // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
                 return reply.view('liste-vehicule', {
-                    vehicules: rows,
+                    vehicules   : rows,
                     nb_vehicules: rows.length
                 });
             } catch (err) {
@@ -34,7 +34,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/vehicule/{vehicule_id}',
+        path  : '/vehicule/{vehicule_id}',
         config: {
             auth: 'session'
         },
@@ -57,7 +57,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/vehicule/agence/{agence_id}',
+        path  : '/vehicule/agence/{agence_id}',
         config: {
             auth: 'session'
         },
@@ -79,7 +79,7 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: '/vehicule/add',
+        path  : '/vehicule/add',
         config: {
             auth: 'session'
         },
@@ -97,7 +97,7 @@ module.exports = [
 
     {
         method: 'GET',
-        path: '/vehicule/add',
+        path  : '/vehicule/add',
         config: {
             auth: 'session'
         },
@@ -116,18 +116,56 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/vehicule/reserver',
+        path  : '/vehicule/reserver',
         config: {
             auth: 'session'
         },
         async handler(request, reply) {
             const pool = request.mysql.pool;
             try {
-                const [rows] = await pool.query(`select * from agence`);
+                const [rows] = await pool.query(`select * from vehicules`);
                 let data = {
-                    agences: rows
+                    vehicules: rows
                 };
                 return reply.view('reserver-vehicule', data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    },
+    {
+        method: 'POST',
+        path  : '/vehicule/update',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            const pool = request.mysql.pool;
+            try {
+                const [rows] = await pool.query(`UPDATE`);
+                let data = {
+                    vehicules: rows
+                };
+                return reply.view('liste-vehicule', data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    },
+    {
+        method: 'GET',
+        path  : '/vehicule/retour',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            const pool = request.mysql.pool;
+            try {
+                const [rows] = await pool.query(`select * from vehicules`);
+                let data = {
+                    vehicules: rows
+                };
+                return reply.view('signaler-retour', data);
             } catch (err) {
                 console.log(err);
             }
@@ -140,7 +178,7 @@ module.exports = [
      */
     {
         method: 'GET',
-        path: '/agences',
+        path  : '/agences',
         config: {
             auth: 'session'
         },
@@ -156,7 +194,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/agence/{id_agence}',
+        path  : '/agence/{id_agence}',
         config: {
             auth: 'session'
         },
@@ -172,7 +210,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/agence/add',
+        path  : '/agence/add',
         config: {
             auth: 'session'
         },
@@ -183,7 +221,7 @@ module.exports = [
 
     {
         method: 'POST',
-        path: '/agence/add',
+        path  : '/agence/add',
         config: {
             auth: 'session'
         },
@@ -224,7 +262,7 @@ module.exports = [
      */
     {
         method: 'GET',
-        path: '/statut/add',
+        path  : '/statut/add',
         config: {
             auth: 'session'
         },
@@ -234,7 +272,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/statuts',
+        path  : '/statuts',
         config: {
             auth: 'session'
         },
@@ -249,23 +287,12 @@ module.exports = [
         }
     },
 
-    {
-        method: 'GET',
-        path  : '/statut/add',
-        config: {
-            auth: 'session'
-        },
-        async handler(request, reply) {
-            return reply.view('creer-statut');
-        }
-    },
 
     /*
      ****************************
      ********** TICKET **********
      ****************************
      */
-
 
     /*
      ****************************
@@ -281,7 +308,7 @@ module.exports = [
      */
     {
         method: 'GET',
-        path: '/utilisateur/add',
+        path  : '/utilisateur/add',
         config: {
             auth: 'session'
         },
@@ -297,7 +324,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/utilisateurs',
+        path  : '/utilisateurs',
         config: {
             auth: 'session'
         },
@@ -316,7 +343,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/utilisateur/{utilisateur_id}',
+        path  : '/utilisateur/{utilisateur_id}',
         config: {
             auth: 'session'
         },
@@ -333,7 +360,7 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: '/utilisateur/add',
+        path  : '/utilisateur/add',
         config: {
             auth: 'session'
         },
@@ -350,16 +377,16 @@ module.exports = [
     },
 
     {
-        method: 'GET',
-        path: '/{path*}',
+        method : 'GET',
+        path   : '/{path*}',
         handler: (request, reply) => {
             return reply.view('404').code(404)
         }
     },
 
     {
-        method: 'GET',
-        path: '/logout',
+        method : 'GET',
+        path   : '/logout',
         options: {
             handler: function (request, h) {
                 //request.server.app.cache.drop(request.state['sid-example'].sid);
@@ -369,8 +396,8 @@ module.exports = [
         }
     },
     {
-        method: 'GET',
-        path: '/',
+        method : 'GET',
+        path   : '/',
         options: {
             handler: function (request, h) {
                 return h.view('home');
@@ -378,10 +405,10 @@ module.exports = [
         }
     },
     {
-        method: ['GET'],
-        path: '/login',
+        method : ['GET'],
+        path   : '/login',
         options: {
-            auth: false,
+            auth   : false,
             handler: async function (request, h) {
                 return h.view('login');
             }
