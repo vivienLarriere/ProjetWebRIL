@@ -249,6 +249,16 @@ module.exports = [
         }
     },
 
+    {
+        method: 'GET',
+        path  : '/statut/add',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            return reply.view('creer-statut');
+        }
+    },
 
     /*
      ****************************
