@@ -8,7 +8,7 @@ module.exports = [
      */
     {
         method: 'GET',
-        path: '/vehicules',
+        path  : '/vehicules',
         config: {
             auth: 'session'
         },
@@ -22,7 +22,7 @@ module.exports = [
                 // On charge la vue 'front-page' avec nos données SQL
                 // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
                 return reply.view('liste-vehicule', {
-                    vehicules: rows,
+                    vehicules   : rows,
                     nb_vehicules: rows.length
                 });
             } catch (err) {
@@ -32,7 +32,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/vehicule/{vehicule_id}',
+        path  : '/vehicule/{vehicule_id}',
         config: {
             auth: 'session'
         },
@@ -42,7 +42,7 @@ module.exports = [
             try {
                 // Notre requête
                 // La réponse est stocké automatiquement sous la forme d'un JSON dans la variable rows
-                const [rows, fields] = await pool.query(`select * from vehicule LEFT JOIN statut ON STATUT_ID = VEHICULE_ID_STATUT LEFT JOIN agence ON AGENCE_ID = VEHICULE_ID_AGENCE where VEHICULE_ID = ${request.params.vehicule_id} GROUP BY VEHICULE_ID;`);
+                const [rows, fields] = await pool.query(`select * from vehicule LEFT JOIN statut ON STATUT_ID = VEHICULE_ID_STATUT LEFT JOIN agence ON AGENCE_ID = VEHICULE_ID_AGENCE LEFT JOIN historique ON VEHICULE_ID = HISTO_VEHICULE_ID LEFT JOIN type_histo ON HISTO_ID_TYPE_HISTO where VEHICULE_ID = ${request.params.vehicule_id} GROUP BY VEHICULE_ID;`);
                 // On charge la vue 'front-page' avec nos données SQL
                 // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
                 return reply.view('statut-vehicule', {
@@ -55,7 +55,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/vehicule/agence/{agence_id}',
+        path  : '/vehicule/agence/{agence_id}',
         config: {
             auth: 'session'
         },
@@ -77,7 +77,7 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: '/vehicule/add',
+        path  : '/vehicule/add',
         config: {
             auth: 'session'
         },
@@ -97,7 +97,7 @@ module.exports = [
 
     {
         method: 'GET',
-        path: '/vehicule/add',
+        path  : '/vehicule/add',
         config: {
             auth: 'session'
         },
@@ -116,7 +116,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/vehicule/reserver/{vehicule_id}',
+        path  : '/vehicule/reserver/{vehicule_id}',
         config: {
             auth: 'session'
         },
@@ -136,7 +136,7 @@ module.exports = [
 
     {
         method: 'GET',
-        path: '/vehicule/retour/{vehicule_id}',
+        path  : '/vehicule/retour/{vehicule_id}',
         config: {
             auth: 'session'
         },
@@ -155,14 +155,15 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: '/vehicule/reserver/{vehicule_id}',
+        path  : '/vehicule/reserver/{vehicule_id}',
         config: {
             auth: 'session'
         },
         async handler(request, reply) {
             const pool = request.mysql.pool;
             try {
-                const [rows2] = await pool.query(`UPDATE vehicule SET VEHICULE_DATE_FIN_PRET = "${request.payload.date_fin_pret}", VEHICULE_DATE_DEBUT_PRET = "${request.payload.date_debut_pret}", VEHICULE_ID_STATUT = 2 WHERE VEHICULE_ID = ${request.params.vehicule_id}`);
+                await pool.query(`UPDATE vehicule SET VEHICULE_DATE_FIN_PRET = "${request.payload.date_fin_pret}", VEHICULE_DATE_DEBUT_PRET = "${request.payload.date_debut_pret}", VEHICULE_ID_STATUT = 2 WHERE VEHICULE_ID = ${request.params.vehicule_id}`);
+                let query2 = `insert into historique (\`HISTO_ID_TYPE_HISTO\`, \`HISTO_VEHICULE_ID\`) VALUES (2, ${request.params.vehicule_id});`;
                 const [rows] = await pool.query('select * from vehicule LEFT JOIN agence ON VEHICULE_ID_AGENCE = AGENCE_ID LEFT JOIN statut ON VEHICULE_ID_STATUT = STATUT_ID;');
                 return reply.redirect('/vehicules');
             } catch (err) {
@@ -172,7 +173,7 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: '/vehicule/retour/{vehicule_id}',
+        path  : '/vehicule/retour/{vehicule_id}',
         config: {
             auth: 'session'
         },
@@ -193,7 +194,7 @@ module.exports = [
      */
     {
         method: 'GET',
-        path: '/agences',
+        path  : '/agences',
         config: {
             auth: 'session'
         },
@@ -209,7 +210,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/agence/{id_agence}',
+        path  : '/agence/{id_agence}',
         config: {
             auth: 'session'
         },
@@ -225,7 +226,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/agence/add',
+        path  : '/agence/add',
         config: {
             auth: 'session'
         },
@@ -236,7 +237,7 @@ module.exports = [
 
     {
         method: 'POST',
-        path: '/agence/add',
+        path  : '/agence/add',
         config: {
             auth: 'session'
         },
@@ -278,7 +279,7 @@ module.exports = [
      */
     {
         method: 'GET',
-        path: '/statut/add',
+        path  : '/statut/add',
         config: {
             auth: 'session'
         },
@@ -288,7 +289,7 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: '/statut/add',
+        path  : '/statut/add',
         config: {
             auth: 'session'
         },
@@ -307,7 +308,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/statuts',
+        path  : '/statuts',
         config: {
             auth: 'session'
         },
@@ -329,7 +330,7 @@ module.exports = [
      */
     {
         method: 'GET',
-        path: '/utilisateur/add',
+        path  : '/utilisateur/add',
         config: {
             auth: 'session'
         },
@@ -345,7 +346,7 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: '/utilisateur/add',
+        path  : '/utilisateur/add',
         config: {
             auth: 'session'
         },
@@ -362,7 +363,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/utilisateurs',
+        path  : '/utilisateurs',
         config: {
             auth: 'session'
         },
@@ -381,7 +382,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/utilisateur/{utilisateur_id}',
+        path  : '/utilisateur/{utilisateur_id}',
         config: {
             auth: 'session'
         },
@@ -398,16 +399,16 @@ module.exports = [
     },
 
     {
-        method: 'GET',
-        path: '/{path*}',
+        method : 'GET',
+        path   : '/{path*}',
         handler: (request, reply) => {
             return reply.view('404').code(404)
         }
     },
 
     {
-        method: 'GET',
-        path: '/logout',
+        method : 'GET',
+        path   : '/logout',
         options: {
             handler: function (request, h) {
                 //request.server.app.cache.drop(request.state['sid-example'].sid);
@@ -417,8 +418,8 @@ module.exports = [
         }
     },
     {
-        method: 'GET',
-        path: '/',
+        method : 'GET',
+        path   : '/',
         options: {
             handler: function (request, h) {
                 return h.view('home');
@@ -426,10 +427,10 @@ module.exports = [
         }
     },
     {
-        method: ['GET'],
-        path: '/login',
+        method : ['GET'],
+        path   : '/login',
         options: {
-            auth: false,
+            auth   : false,
             handler: async function (request, h) {
                 return h.view('login');
             }
