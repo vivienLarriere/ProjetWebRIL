@@ -62,7 +62,7 @@
                 <!-- Mettre balises pour les données de la DB -->
                 <tbody>
                     {{#each agences}}
-                    <tr onclick="window.location.href = '{{thisURL}}agence/{{this.AGENCE_ID}}'">
+                    <tr class="table-hover" onclick="window.location.href = '{{thisURL}}agence/{{this.AGENCE_ID}}'">
                         <td>{{this.AGENCE_NOM}}</td>
                         <td>{{this.AGENCE_ADRESSE}}</td>
                         <td>{{this.AGENCE_TEL}}</td>
