@@ -87,7 +87,7 @@ module.exports = [
             try {
                 var datum = request.payload.date_fabrication;
                 let query = `insert into vehicule (\`VEHICULE_DATE_FABRICATION\`, \`VEHICULE_HAUTEUR\`, \`VEHICULE_LARGEUR\`, \`VEHICULE_LONGUEUR\`, \`VEHICULE_POIDS\`, \`VEHICULE_PUISSANCE\`, \`VEHICULE_ID_STATUT\`, \`VEHICULE_MARQUE\`, \`VEHICULE_MODELE\`, \`VEHICULE_ID_AGENCE\`) VALUES ("${datum}", ${request.payload.hauteur}, ${request.payload.largeur}, ${request.payload.longueur}, ${request.payload.poids}, ${request.payload.puissance}, 1, "${request.payload.marque}","${request.payload.modele}",${request.payload.id_agence});`;
-                const [rows] = await pool.query(query);
+                await pool.query(query);
                 return reply.redirect('/vehicules');
             } catch (err) {
                 console.log(err);
@@ -164,11 +164,7 @@ module.exports = [
             try {
                 const [rows2] = await pool.query(`UPDATE vehicule SET VEHICULE_DATE_FIN_PRET = "${request.payload.date_fin_pret}", VEHICULE_DATE_DEBUT_PRET = "${request.payload.date_debut_pret}", VEHICULE_ID_STATUT = 2 WHERE VEHICULE_ID = ${request.params.vehicule_id}`);
                 const [rows] = await pool.query('select * from vehicule LEFT JOIN agence ON VEHICULE_ID_AGENCE = AGENCE_ID LEFT JOIN statut ON VEHICULE_ID_STATUT = STATUT_ID;');
-                let data = {
-                    vehicules: rows,
-                    nb_vehicules: rows.length
-                };
-                return reply.view('liste-vehicule', data);
+                return reply.redirect('/vehicules');
             } catch (err) {
                 console.log(err);
             }
@@ -184,12 +180,7 @@ module.exports = [
             const pool = request.mysql.pool;
             try {
                 await pool.query(`UPDATE vehicule SET VEHICULE_ID_STATUT = 1, VEHICULE_DATE_FIN_PRET = "", VEHICULE_DATE_DEBUT_PRET = "" WHERE VEHICULE_ID = ${request.params.vehicule_id}`);
-                const [rows] = await pool.query('select * from vehicule LEFT JOIN agence ON VEHICULE_ID_AGENCE = AGENCE_ID LEFT JOIN statut ON VEHICULE_ID_STATUT = STATUT_ID;');
-                let data = {
-                    vehicules: rows,
-                    nb_vehicules: rows.length
-                };
-                return reply.view('liste-vehicule', data);
+                return reply.redirect('/vehicules');
             } catch (err) {
                 console.log(err);
             }
@@ -254,7 +245,6 @@ module.exports = [
             const pool = request.mysql.pool;
             try {
                 let query = `insert into agence (\`AGENCE_NOM\`, \`AGENCE_NUM_ADRESSE\`, \`AGENCE_NOM_ADRESSE\`, \`AGENCE_MAIL\`, \`AGENCE_TEL\`, \`AGENCE_FAX\`, \`AGENCE_CP\`, \`AGENCE_VILLE\`)  VALUES ("${request.payload.nom}", "${request.payload.num_adresse}", "${request.payload.nom_adresse}", "${request.payload.mail}", "${request.payload.tel}", "${request.payload.fax}", "${request.payload.cp}", "${request.payload.ville}");`;
-                console.log(query);
                 await pool.query(query);
                 //  INSERT INTO `agence` (`AGENCE_ID`, `AGENCE_NOM`, `AGENCE_NUM_ADRESSE`, `AGENCE_NOM_ADRESSE`, `AGENCE_MAIL`, `AGENCE_TEL`, `AGENCE_FAX`, `AGENCE_ID_FICHIER`, `AGENCE_CP`, `AGENCE_VILLE`) VALUES (2, 'Trotro6', '56', 'Labas', 'toto@toto.fr', '0304056001', '0807090645', NULL, '55440', 'Lamarche');
                 return reply.redirect('/agences');
@@ -294,6 +284,25 @@ module.exports = [
         },
         async handler(request, reply) {
             return reply.view('creer-statut');
+        }
+    },
+    {
+        method: 'POST',
+        path: '/statut/add',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            // On ouvre une requête à MySQL
+            const pool = request.mysql.pool;
+            try {
+                let query = `insert into statut (\`STATUT_LIB\`, \`STATUT_DESCRIPTION\`)  VALUES ("${request.payload.lib}", "${request.payload.description}");`;
+                console.log(query);
+                await pool.query(query);
+                return reply.redirect('/statuts');
+            } catch (err) {
+                console.log(err);
+            }
         }
     },
     {
@@ -345,8 +354,7 @@ module.exports = [
             try {
                 let query = `INSERT INTO utilisateur (\`UTILISATEUR_IDENTIFIANT\`, \`UTILISATEUR_NOM\`, \`UTILISATEUR_PRENOM\`, \`UTILISATEUR_TEL\`, \`UTILISATEUR_FAX\`, \`UTILISATEUR_MOBILE\`, \`UTILISATEUR_ID_AGENCE\`, \`UTILISATEUR_PWD\`) values ("${request.payload.identifiant}", "${request.payload.nom}", "${request.payload.prenom}", "${request.payload.tel}", "${request.payload.fax}", "${request.payload.mobile}", "${request.payload.id_agence}", "${request.payload.num_adresse}");`;
                 await pool.query(query);
-                const [rows] = await pool.query('select * from utilisateur LEFT JOIN agence ON UTILISATEUR_ID_AGENCE = AGENCE_ID;');
-                return reply.view('liste-utilisateurs', {utilisateurs: rows});
+                return reply.redirect('/utilisateurs');
             } catch (err) {
                 console.log(err);
             }
