@@ -41,12 +41,14 @@ module.exports = [
             const pool = request.mysql.pool;
             try {
                 // Notre requête
-                // La réponse est stocké automatiquement sous la forme d'un JSON dans la variable rows
-                const [rows, fields] = await pool.query(`select * from vehicule LEFT JOIN statut ON STATUT_ID = VEHICULE_ID_STATUT LEFT JOIN agence ON AGENCE_ID = VEHICULE_ID_AGENCE LEFT JOIN historique ON VEHICULE_ID = HISTO_VEHICULE_ID LEFT JOIN type_histo ON HISTO_ID_TYPE_HISTO where VEHICULE_ID = ${request.params.vehicule_id} GROUP BY VEHICULE_ID;`);
                 // On charge la vue 'front-page' avec nos données SQL
                 // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
+                // La réponse est stocké automatiquement sous la forme d'un JSON dans la variable rows
+                const [rows] = await pool.query(`select * from vehicule LEFT JOIN statut ON STATUT_ID = VEHICULE_ID_STATUT LEFT JOIN agence ON AGENCE_ID = VEHICULE_ID_AGENCE LEFT JOIN historique ON VEHICULE_ID = HISTO_VEHICULE_ID LEFT JOIN type_histo ON HISTO_ID_TYPE_HISTO where VEHICULE_ID = ${request.params.vehicule_id};`);
+                const [rows2] = await pool.query(`select * from historique LEFT JOIN type_histo ON HISTO_ID_TYPE_HISTO = TYPE_HISTO_ID where HISTO_VEHICULE_ID = ${request.params.vehicule_id};`);
                 return reply.view('statut-vehicule', {
                     vehicule: rows,
+                    histo: rows2
                 });
             } catch (err) {
                 console.log(err);
