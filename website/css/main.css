@@ -8972,6 +8972,10 @@ label.panel-block:hover {
 /*$blue: #0000ff;*/
 /*Mettre "../" pour les liens dans le css car ça tombe sur "./css" */
 /*html {background-color: $black;}*/
+.title, .subtitle {
+  text-align: center;
+}
+
 .hero-body {
   /*background: url("../images/header.jpg");*/
   background-size: 100%;
@@ -9019,7 +9023,11 @@ label.panel-block:hover {
   color: white;
 }
 
-.button p {
+.section {
+  padding-top: 0;
+}
+
+.btn-accueil p {
   margin-left: 25px;
   font-size: initial;
 }
@@ -9042,7 +9050,7 @@ label.panel-block:hover {
 }
 
 .columns {
-  margin: 0 !important;
+  margin: 0px;
 }
 
 /* LOGIN */
@@ -9089,7 +9097,7 @@ label.panel-block:hover {
 .table tr {
   text-align: center;
 }
-.table tr:hover {
+.table tr.table-hover:hover {
   background: #3273dc;
   color: white;
   transition: background 150ms, color 150ms;

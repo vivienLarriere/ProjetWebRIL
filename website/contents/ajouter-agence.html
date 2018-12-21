@@ -47,35 +47,78 @@
             <div class="columns ">
                 <div class="column"><p>Adresse</p></div>
                 <div class="column">
-                    <input class="input" name="num_adresse" placeholder="N°" type="text">
-                    &nbsp;
-                    <input class="input" name="nom_adresse" placeholder="Rue/Avenue/Impasse" type="text">
-                    &nbsp;
-                    <input class="input" name="cp" placeholder="cpt." type="text">
-                    &nbsp;
-                    <input class="input" name="ville" placeholder="Ville" type="text">
+                    <span class="button is-medium">
+                        <i class="fas fa-car fa-2x"></i>
+                    </span>
                 </div>
+                <div class="column">
+                    <span class="button is-medium">
+                        <img src="{{thisURL}}images/choisir-un-vehicule.png" width="32px"/>
+                    </span>
+                </div>
+                <div class="column">
+                    <span class="button is-medium">
+                        <i class="fas fa-unlock fa-2x"></i>
+                    </span>
+                </div>
+                </di>
             </div>
         </div>
-        <div class="columns is-pulled-right">
-            <div class="column 	">
+        <div class="column is-one-fifth"></div>
+        <!-- Titre page -->
+        <div class="column is-one-fifth">
+        </div>
+        <!-- LOGO -->
+        <div class="column is-one-fifth">
+            <img src="{{thisURL}}images/logo.png" width=""/>
+        </div>
+    </div>
+</span>
+<section class="section">
+    <div>
+        <h1 class="title">Ajouter une agence</h1>
+    </div>
+    <form action="{{thisURL}}agence/add" method="post">
+        <div class="columns descriptif">
+            <div class="column">
                 <div class="columns ">
-                    <div class="column"><p>Télephone</p></div>
-                    <div class="column"><input class="input" name="tel" placeholder="" type="text"></div>
+                    <div class="column"><p>Nom</p></div>
+                    <div class="column"><input class="input" name="nom" placeholder="" type="text"></div>
                 </div>
                 <div class="columns ">
-                    <div class="column"><p>Fax</p></div>
-                    <div class="column"><input class="input" name="fax" placeholder="" type="text"></div>
-                </div>
-                <div class="columns ">
-                    <div class="column"><p>Adresse mail agence</p></div>
-                    <div class="column"><input class="input" name="mail" placeholder="" type="text"></div>
-                </div>
-                <div class="columns is-pulled-right">
-                    <div class="column  ">
-                        <input class="button" name="" type="submit" value="Valider"></a>
+                    <div class="column"><p>Adresse</p></div>
+                    <div class="column">
+                        <input class="input" name="num_adresse" placeholder="N°" type="text">
+                        &nbsp;
+                        <input class="input" name="nom_adresse" placeholder="Rue/Avenue/Impasse" type="text">
+                        &nbsp;
+                        <input class="input" name="cp" placeholder="cpt." type="text">
+                        &nbsp;
+                        <input class="input" name="ville" placeholder="Ville" type="text">
                     </div>
                 </div>
             </div>
-        </div>
-</form>
+            <div class="columns is-pulled-right">
+                <div class="column  ">
+                    <div class="columns ">
+                        <div class="column"><p>Télephone</p></div>
+                        <div class="column"><input class="input" name="tel" placeholder="" type="text"></div>
+                    </div>
+                    <div class="columns ">
+                        <div class="column"><p>Fax</p></div>
+                        <div class="column"><input class="input" name="fax" placeholder="" type="text"></div>
+                    </div>
+                    <div class="columns ">
+                        <div class="column"><p>Adresse mail agence</p></div>
+                        <div class="column"><input class="input" name="mail" placeholder="" type="text"></div>
+                    </div>
+                    <div class="columns is-pulled-right">
+                        <div class="column  ">
+                            <a href="javascript:history.go(-1)" class="button is-warning is-medium">Retour</a>
+                            <input type="submit" class="button is-success is-medium" value="Valider">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>

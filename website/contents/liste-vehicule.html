@@ -39,34 +39,40 @@
 	</span>
 <section class="section">
     <div>
+        <h1 class="title">Liste véhicules</h1>
+    </div>
+    <div>
         <!-- TABLEAU -->
         <!-- Barre de recherche rapide -->
-        <div class="columns recherche">
+        <a class="button is-one-fifth is-primary" href="{{thisURL}}vehicule/add">
+            <img style="display: none;" alt="img-vehicle" src="{{thisURL}}images/choisir-un-vehicule.png" width="32px"/>
+            <p>Ajouter véhicule</p>
+        </a>
+        <div class="columns recherche" style="display: none;">
             <div class="column"><input class="button is-success" onclick="window.location = '{{thisURL}}vehicule/add';"
-                                       type="reset" value="Ajouter un véhicule"></div>
+            type="reset" value="Ajouter un véhicule"></div>
             <div class="column"><input class="input" placeholder="Marque" type="text"></div>
             <div class="column"><input class="input" placeholder="Agence" type="text"></div>
             <div class="column"><input class="input" placeholder="Text input" type="text"></div>
-            <div class="column"><input class="button" type="submit" value="Rechercher"></div>
             <div class="column"><input class="input" placeholder="Statut" type="text"></div>
+            <div class="column"><input class="button" type="submit" value="Rechercher"></div>
         </div>
-        <p>{{nb_vehicules}} véhicules</p>
-        <!-- Indiquer nb véhicules dispo - Module nb véhicules -->
-        <div>
-
-            <table class="table is-fullwidth">
-
-                <!-- Mettre balises pour les données de la DB -->
-                <thead>
+    </div>
+    <p>{{nb_vehicules}} véhicules</p>
+    <!-- Indiquer nb véhicules dispo - Module nb véhicules -->
+    <div>
+        <table class="table is-fullwidth">
+            <!-- Mettre balises pour les données de la DB -->
+            <thead>
                 <th>Statut</th>
                 <th>Date de Prêt</th>
                 <th>Agence</th>
                 <th>Modéle</th>
                 <th>Marque</th>
-                </thead>
-                <tbody>
+            </thead>
+            <tbody>
                 {{#each vehicules}}
-                <tr onclick="window.location.href = '{{thisURL}}vehicule/{{this.VEHICULE_ID}}'">
+                <tr class="table-hover" onclick="window.location.href = '{{thisURL}}vehicule/{{this.VEHICULE_ID}}'">
                     <td>
                         {{this.STATUT_LIB}}
                     </td>
@@ -82,9 +88,9 @@
                     </td>
                 </tr>
                 {{/each}}
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+        </table>
     </div>
-    <!-- Page d'accueil -->
+</div>
+<!-- Page d'accueil -->
 </section>

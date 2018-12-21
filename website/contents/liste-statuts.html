@@ -1,5 +1,7 @@
 <!-- menu-->
 <span class="menu-interne">
+	<div class="columns">
+		<div class="column is-one-third">
 			<div class="columns">
 			<div class="column is-one-third">
 				<div class="columns">
@@ -25,38 +27,59 @@
 					</div>
                     </di>
 				</div>
-			</div>
-			<div class="column is-one-fifth"></div>
-                <!-- Titre page -->
-			<div class="column is-one-fifth" style="text-align: right;">
-				<p>Socopec Entretien</p>
-			</div>
-                <!-- LOGO -->
-			<div class="column is-one-fifth">
-				<a href="{{thisURL}}"> <img src="{{thisURL}}images/logo.png" width=""/></a>
+				<div class="column">
+					<a href="{{thisURL}}statut"><span class="button is-medium">
+						<i class="fas fa-car fa-2x"></i>
+					</span></a>
+				</div>
+				<div class="column">
+					<a href="{{thisURL}}vehicules"><span class="button is-medium">
+						<img src="{{thisURL}}images/choisir-un-vehicule.png" width="32px"/>
+					</span></a>
+				</div>
+				<div class="column">
+					<a href="{{thisURL}}logout"><span class="button is-medium">
+						<i class="fas fa-unlock fa-2x"></i>
+					</span></a>
+				</div>
+				</di>
 			</div>
 		</div>
-	</span>
-<div class="columns recherche">
-    <div class="column"><input class="button" onclick="window.location='{{thisURL}}statut/add';" value="Ajouter statut">
-    </div>
+		<div class="column is-one-fifth"></div>
+		<!-- Titre page -->
+		<div class="column is-one-fifth is-primary" style="text-align: right;">
+		</div>
+		<!-- LOGO -->
+		<div class="column is-one-fifth">
+			<a href="{{thisURL}}"> <img src="{{thisURL}}images/logo.png" width=""/></a>
+		</div>
+	</div>
+</span>
+<section class="section">
+	<div>
+		<h1 class="title">Gérer les statuts</h1>
+	</div>
+	<div class="columns recherche">
+		<div class="column"><input class="button is-one-fifth is-primary" onclick="window.location='{{thisURL}}statut/add';" value="Ajouter statut">
+	</div>
 </div>
 <!-- TABLEAU -->
 <div>
-    <table class="table is-fullwidth">
-        <thead>
-        <tr>
-            <th>Statut</th>
-            <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        {{#each statuts}}
-        <tr>
-            <td>{{this.STATUT_LIB}}</td>
-            <td>{{this.STATUT_DESCRIPTION}}</td>
-        </tr>
-        {{/each}}
-        </tbody>
-    </table>
+	<table class="table is-fullwidth">
+		<thead>
+			<tr>
+				<th>Statut</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each statuts}}
+			<tr>
+				<td>{{this.STATUT_LIB}}</td>
+				<td>{{this.STATUT_DESCRIPTION}}</td>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
 </div>
+</section>

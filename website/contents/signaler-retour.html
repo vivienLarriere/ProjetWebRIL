@@ -41,45 +41,80 @@
 <form action="{{thisURL}}vehicule/retour/{{this.VEHICULE_ID}}" method="post">
     <div class="columns descriptif">
         <div class="column">
-            <div class="columns ">
-                <div class="column"><p>Marque</p></div>
-                <div class="column"><p>{{this.VEHICULE_MARQUE}}</p></div>
-            </div>
-            <div class="columns ">
-                <div class="column"><p>Modèle</p></div>
-                <div class="column"><p>{{this.VEHICULE_MODELE}}</p></div>
-            </div>
-            <div class="columns ">
-                <div class="column"><p>Agence Afiliée</p></div>
-                <div class="column"><p>{{this.AGENCE_NOM}}</p></div>
-            </div>
-            <div class="columns ">
-                <div class="column"><p>Date de prêt</p></div>
-                <div class="column"><p>{{this.VEHICULE_DATE_DEBUT_PRET}}</p></div>
-            </div>
-            <div class="columns">
-                <div class="column"><p>Date de retour</p></div>
-                <div class="column"><p>{{this.VEHICULE_DATE_FIN_PRET}}</p></div>
-            </div>
-            <!--
-              <hr>
-              <b>Problèmes rencontrés ?</b>
-              <div class="columns ">
-                  <div class="column"><p>Objet</p></div>
-                  <div class="column"><input class="input" name="pb_objet" placeholder="" type="text"></div>
-              </div>
-              <div class="columns ">
-                  <div class="column"><p>Description</p></div>
-                  <div class="column">
-                      <input class="textarea" name="pb_description" placeholder="Décrivez votre problème" type="textarea">
-                  </div>
-              </div> -->
-            <div class="columns is-pulled-right">
-                <div class="column 	">
-                    <button class="button" type="submit">Valider</button>
-                </div>
-            </div>
+          <a href="{{thisURL}}statut"><span class="button is-medium">
+            <i class="fas fa-car fa-2x"></i>
+          </span></a>
         </div>
+        <div class="column">
+          <a href="{{thisURL}}vehicules"><span class="button is-medium">
+            <img src="{{thisURL}}images/choisir-un-vehicule.png" width="32px"/>
+          </span></a>
+        </div>
+        <div class="column">
+          <a href="{{thisURL}}logout"><span class="button is-medium">
+            <i class="fas fa-unlock fa-2x"></i>
+          </span></a>
+        </div>
+        </di>
+      </div>
     </div>
-</form>
-{{/each}}
+    <div class="column is-one-fifth"></div>
+    <!-- Titre page -->
+    <div class="column is-one-fifth" style="text-align: right;">
+      
+    </div>
+    <!-- LOGO -->
+    <div class="column is-one-fifth">
+      <a href="{{thisURL}}"> <img src="{{thisURL}}images/logo.png" width=""/></a>
+    </div>
+  </div>
+</span>
+<section class="section">
+  <div><h1 class="title">Signaler retour</h1></div>
+  {{#each vehicules}}
+  <form action="{{thisURL}}vehicule/retour/{{this.VEHICULE_ID}}" method="post">
+    <div class="columns descriptif">
+      <div class="column">
+        <div class="columns ">
+          <div class="column"><p>Marque</p></div>
+          <div class="column"><p>{{this.VEHICULE_MARQUE}}</p></div>
+        </div>
+        <div class="columns ">
+          <div class="column"><p>Modèle</p></div>
+          <div class="column"><p>{{this.VEHICULE_MODELE}}</p></div>
+        </div>
+        <div class="columns ">
+          <div class="column"><p>Agence Afiliée</p></div>
+          <div class="column"><p>{{this.AGENCE_NOM}}</p></div>
+        </div>
+        <div class="columns ">
+          <div class="column"><p>Date de prêt</p></div>
+          <div class="column"><p>{{this.VEHICULE_DATE_DEBUT_PRET}}</p></div>
+        </div>
+        <div class="columns">
+          <div class="column"><p>Date de retour</p></div>
+          <div class="column"><p>{{this.VEHICULE_DATE_FIN_PRET}}</p></div>
+        </div>
+        <!--
+        <hr>
+        <b>Problèmes rencontrés ?</b>
+        <div class="columns ">
+          <div class="column"><p>Objet</p></div>
+          <div class="column"><input class="input" name="pb_objet" placeholder="" type="text"></div>
+        </div>
+        <div class="columns ">
+          <div class="column"><p>Description</p></div>
+          <div class="column">
+            <input class="textarea" name="pb_description" placeholder="Décrivez votre problème" type="textarea">
+          </div>
+        </div> -->
+        <div class="columns is-pulled-right">
+          <div class="column  ">
+            <button class="button" type="submit">Valider</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  {{/each}}
+</section>

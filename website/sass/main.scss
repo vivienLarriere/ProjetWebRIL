@@ -31,6 +31,10 @@ $primary-invert: $pink-invert;
 /*Mettre "../" pour les liens dans le css car ça tombe sur "./css" */
 
 /*html {background-color: $black;}*/
+.title, .subtitle{
+  text-align: center;
+}
+
 .hero-body {
   /*background: url("../images/header.jpg");*/
   background-size: 100%;
@@ -80,7 +84,11 @@ $primary-invert: $pink-invert;
   }
 }
 
-.button p {
+.section{
+  padding-top: 0;
+}
+
+.btn-accueil p {
   margin-left: 25px;
   font-size: initial;
 }
@@ -104,10 +112,8 @@ $primary-invert: $pink-invert;
 
 }
 
-
-
 .columns {
-  margin: 0 !important;
+  margin: 0px;
 }
 
 /* LOGIN */
@@ -162,7 +168,7 @@ $primary-invert: $pink-invert;
   }
 
   /* Si hover alors appliuer la classe "is-selected" */
-  tr:hover {
+  tr.table-hover:hover {
     background: $blue;
     color: $white;
     transition: background 150ms, color 150ms;
