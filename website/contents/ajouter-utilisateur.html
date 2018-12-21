@@ -39,140 +39,62 @@
 	</span>
 <!-- Page permettant d'ajouter un nouvel utilisateur -->
 <section class="section">
-  <div><h1 class="title">Ajouter un utilisateur</h1></div>
-  <form method="post" action="{{thisURL}}utilisateur/add">
-    <div class="columns descriptif">
-      <div class="column">
-        <div class="columns">
-          <div class="column"><p>Nom</p></div>
-          <div class="column"><input name="nom" class="input" placeholder="" type="text"></div>
-        </div>
-        <div class="columns ">
-          <div class="column"><p>Prénom</p></div>
-          <div class="column"><input name="prenom" class="input" placeholder="" type="text"></div>
-        </div>
-        <div class="columns ">
-          <div class="column"><p>Agence Affiliée</p></div>
-          <div class="column">
-            <!-- Mettre les balises pour les différentes agences -->
-            <div class="select">
-              <select name="id_agence">
-                {{#each agences}}
-                <option value="{{this.AGENCE_ID}}">{{this.AGENCE_NOM}}</option>
-                {{/each}}
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="columns ">
-          <div class="column"><p>Télephone</p></div>
-          <div class="column"><input name="tel" class="input" placeholder="" type="tel"></div>
-        </div>
-        <div class="columns ">
-          <div class="column"><p>Mobile</p></div>
-          <div class="column"><input name="mobile" class="input" placeholder="" type="tel"></div>
-        </div>
-        <div class="columns ">
-          <div class="column"><p>Fax</p></div>
-          <div class="column"><input name="fax" class="input" placeholder="" type="tel"></div>
-        </div>
-        <!--   <div class="columns ">
-          <div class="column"><p>Photos</p></div>
-          <div class="column">
-            <div class="file has-name is-boxed">
-              <label class="file-label">
-                <input class="file-input" name="resume" type="file">
-                <span class="file-cta">
-                  <span class="file-icon">
-                    <i class="fas fa-upload"></i>
-                  </span>
-                  <span class="file-label">
-                    Choose a file…
-                  </span>
-                </span>
-                <span class="file-name">
-                </span>
-              </label>
-            </div>
-            <div class="columns ">
-                <div class="column"><p>Agence Affiliée</p></div>
-                <div class="column">
-                    <!-- Mettre les balises pour les différentes agences -->
-                    <div class="select">
-                        <select name="id_agence">
-                            {{#each agences}}
-                            <option value="{{this.AGENCE_ID}}">{{this.AGENCE_NOM}}</option>
-                            {{/each}}
-                        </select>
+    <div><h1 class="title">Ajouter un utilisateur</h1></div>
+    <form method="post" action="{{thisURL}}utilisateur/add">
+        <div class="columns descriptif">
+            <div class="column">
+                <div class="columns">
+                    <div class="column"><p>Nom</p></div>
+                    <div class="column"><input name="nom" class="input" placeholder="" type="text"></div>
+                </div>
+                <div class="columns ">
+                    <div class="column"><p>Prénom</p></div>
+                    <div class="column"><input name="prenom" class="input" placeholder="" type="text"></div>
+                </div>
+                <div class="columns ">
+                    <div class="column"><p>Agence Affiliée</p></div>
+                    <div class="column">
+                        <!-- Mettre les balises pour les différentes agences -->
+                        <div class="select">
+                            <select name="id_agence">
+                                {{#each agences}}
+                                <option value="{{this.AGENCE_ID}}">{{this.AGENCE_NOM}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns ">
+                    <div class="column"><p>Télephone</p></div>
+                    <div class="column"><input name="tel" class="input" placeholder="" type="tel"></div>
+                </div>
+                <div class="columns ">
+                    <div class="column"><p>Mobile</p></div>
+                    <div class="column"><input name="mobile" class="input" placeholder="" type="tel"></div>
+                </div>
+                <div class="columns ">
+                    <div class="column"><p>Fax</p></div>
+                    <div class="column"><input name="fax" class="input" placeholder="" type="tel"></div>
+                </div>
+                <div class="columns ">
+                    <div class="column"><p>Identifiant</p></div>
+                    <div class="column"><input name="identifiant" class="input" placeholder="" type="text"></div>
+                </div>
+                <div class="columns ">
+                    <div class="column"><p>Mot de passe</p></div>
+                    <div class="column"><input name="pwd" class="input" placeholder="" type="password"></div>
+                </div>
+                <div class="columns ">
+                    <div class="column"><p>Confirmer mot de passe</p></div>
+                    <div class="column"><input name="confirm_pwd" class="input" placeholder="" type="password"></div>
+                </div>
+                <div class="columns is-pulled-right">
+                    <div class="column 	">
+                        <a href="javascript:history.go(-1)" class="button">Retour</a>
+                        <input type="submit" class="button is-success" value="Valider">
                     </div>
                 </div>
             </div>
-            <div class="columns ">
-                <div class="column"><p>Télephone</p></div>
-                <div class="column"><input name="tel" class="input" placeholder="" type="tel"></div>
-            </div>
-            <div class="columns ">
-                <div class="column"><p>Mobile</p></div>
-                <div class="column"><input name="mobile" class="input" placeholder="" type="tel"></div>
-            </div>
-            <div class="columns ">
-                <div class="column"><p>Fax</p></div>
-                <div class="column"><input name="fax" class="input" placeholder="" type="tel"></div>
-            </div>
-            <!--   <div class="columns ">
-                   <div class="column"><p>Photos</p></div>
-                   <div class="column">
-                       <div class="file has-name is-boxed">
-                           <label class="file-label">
-                               <input class="file-input" name="resume" type="file">
-                               <span class="file-cta">
-                                           <span class="file-icon">
-                                               <i class="fas fa-upload"></i>
-                                           </span>
-                                           <span class="file-label">
-                                               Choose a file…
-                                           </span>
-                                       </span>
-                               <span class="file-name">
-                                       </span>
-                           </label>
-                       </div>
-                   </div>
-               </div> -->
-            <div class="columns ">
-                <div class="column"><p>Identifiant</p></div>
-                <div class="column"><input name="identifiant" class="input" placeholder="" type="text"></div>
-            </div>
-            <div class="columns ">
-                <div class="column"><p>Mot de passe</p></div>
-                <div class="column"><input name="pwd" class="input" placeholder="" type="password"></div>
-            </div>
-            <div class="columns ">
-                <div class="column"><p>Confirmer mot de passe</p></div>
-                <div class="column"><input name="confirm_pwd" class="input" placeholder="" type="password"></div>
-            </div>
-            <div class="columns is-pulled-right">
-                <div class="column 	">
-                    <a href="javascript:history.go(-1)" class="button">Retour</a>
-                    <input type="submit" class="button is-success" value="Valider">
-                </div>
-            </div>
         </div>
-        <div class="columns ">
-          <div class="column"><p>Mot de passe</p></div>
-          <div class="column"><input name="pwd" class="input" placeholder="" type="text"></div>
-        </div>
-        <div class="columns ">
-          <div class="column"><p>Confirmer mot de passe</p></div>
-          <div class="column"><input name="confirm_pwd" class="input" placeholder="" type="text"></div>
-        </div>
-        <div class="columns is-pulled-right">
-          <div class="column  ">
-            <a href="javascript:history.go(-1)" class="button is-warning is-medium">Retour</a>
-            <input class="button is-success is-medium" name="" type="submit" value="Valider"></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </form>
+    </form>
 </section>
