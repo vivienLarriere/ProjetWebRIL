@@ -352,7 +352,7 @@ module.exports = [
         async handler(request, reply) {
             const pool = request.mysql.pool;
             try {
-                let query = `INSERT INTO utilisateur (\`UTILISATEUR_IDENTIFIANT\`, \`UTILISATEUR_NOM\`, \`UTILISATEUR_PRENOM\`, \`UTILISATEUR_TEL\`, \`UTILISATEUR_FAX\`, \`UTILISATEUR_MOBILE\`, \`UTILISATEUR_ID_AGENCE\`, \`UTILISATEUR_PWD\`) values ("${request.payload.identifiant}", "${request.payload.nom}", "${request.payload.prenom}", "${request.payload.tel}", "${request.payload.fax}", "${request.payload.mobile}", "${request.payload.id_agence}", "${request.payload.num_adresse}");`;
+                let query = `INSERT INTO utilisateur (\`UTILISATEUR_IDENTIFIANT\`, \`UTILISATEUR_NOM\`, \`UTILISATEUR_PRENOM\`, \`UTILISATEUR_TEL\`, \`UTILISATEUR_FAX\`, \`UTILISATEUR_MOBILE\`, \`UTILISATEUR_ID_AGENCE\`, \`UTILISATEUR_PWD\`) values ("${request.payload.identifiant}", "${request.payload.nom}", "${request.payload.prenom}", "${request.payload.tel}", "${request.payload.fax}", "${request.payload.mobile}", "${request.payload.id_agence}", "${request.payload.pwd}");`;
                 await pool.query(query);
                 return reply.redirect('/utilisateurs');
             } catch (err) {
