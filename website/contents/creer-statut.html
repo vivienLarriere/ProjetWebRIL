@@ -1,21 +1,62 @@
-<div class="columns descriptif">
-	<div class="column">
-		<div class="columns ">
-			<div class="column"><p>Nom</p></div>
-			<div class="column"><input class="input" type="text" placeholder=""></div>
-		</div>
-		<div class="columns ">
-			<div class="column"><p>Description</p></div>
-			<div class="column">
-				<textarea class="textarea" placeholder=""></textarea>
+<!-- menu-->
+<span class="menu-interne">
+			<div class="columns">
+			<div class="column is-one-third">
+				<div class="columns">
+					<div class="column ">
+						<a href="{{thisURL}}"><span class="button is-medium">
+							<i class="fas fa-home fa-2x"></i>
+						</span></a>
+					</div>
+					<div class="column">
+						<a href="{{thisURL}}statut"><span class="button is-medium">
+							<i class="fas fa-car fa-2x"></i>
+						</span></a>
+					</div>
+					<div class="column">
+						<a href="{{thisURL}}vehicules"><span class="button is-medium">
+							<img src="{{thisURL}}images/choisir-un-vehicule.png" width="32px"/>
+						</span></a>
+					</div>
+					<div class="column">
+						<a href="{{thisURL}}logout"><span class="button is-medium">
+							<i class="fas fa-unlock fa-2x"></i>
+						</span></a>
+					</div>
+                    </di>
+				</div>
 			</div>
-			
-		</div>
-		<div class="columns is-pulled-right">
-			<div class="column 	">
-                <a href="javascript:history.go(-1)" class="button">Retour</a>
-                <input type="submit" class="button" value="Valider">
+			<div class="column is-one-fifth"></div>
+                <!-- Titre page -->
+			<div class="column is-one-fifth" style="text-align: right;">
+				<p>Socopec Entretien</p>
+			</div>
+                <!-- LOGO -->
+			<div class="column is-one-fifth">
+				<a href="{{thisURL}}"> <img src="{{thisURL}}images/logo.png" width=""/></a>
 			</div>
 		</div>
-	</div>
-</div>
+	</span>
+<form method="post" action="{{thisURL}}statut/add">
+    <div class="columns descriptif">
+        <div class="column">
+            <div class="columns ">
+                <div class="column"><p>Nom</p></div>
+                <div class="column"><input class="input" name="lib" type="text" placeholder=""></div>
+            </div>
+            <div class="columns ">
+                <div class="column"><p>Description</p></div>
+                <div class="column">
+                    <textarea class="textarea" name="description" placeholder=""></textarea>
+                </div>
+
+            </div>
+            <div class="columns is-pulled-right">
+                <div class="column 	">
+                    <a href="javascript:history.go(-1)" class="button">Retour</a>
+                    <input type="submit" class="button is-success" value="Valider">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

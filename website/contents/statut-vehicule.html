@@ -1,5 +1,45 @@
+<!-- menu-->
+<span class="menu-interne">
+			<div class="columns">
+			<div class="column is-one-third">
+				<div class="columns">
+					<div class="column ">
+						<a href="{{thisURL}}"><span class="button is-medium">
+							<i class="fas fa-home fa-2x"></i>
+						</span></a>
+					</div>
+					<div class="column">
+						<a href="{{thisURL}}statut"><span class="button is-medium">
+							<i class="fas fa-car fa-2x"></i>
+						</span></a>
+					</div>
+					<div class="column">
+						<a href="{{thisURL}}vehicules"><span class="button is-medium">
+							<img src="{{thisURL}}images/choisir-un-vehicule.png" width="32px"/>
+						</span></a>
+					</div>
+					<div class="column">
+						<a href="{{thisURL}}logout"><span class="button is-medium">
+							<i class="fas fa-unlock fa-2x"></i>
+						</span></a>
+					</div>
+                    </di>
+				</div>
+			</div>
+			<div class="column is-one-fifth"></div>
+                <!-- Titre page -->
+			<div class="column is-one-fifth" style="text-align: right;">
+				<p>Socopec Entretien</p>
+			</div>
+                <!-- LOGO -->
+			<div class="column is-one-fifth">
+				<a href="{{thisURL}}"> <img src="{{thisURL}}images/logo.png" width=""/></a>
+			</div>
+		</div>
+	</span>
+{{#each vehicule}}
 <div>
-    <h1 class="title is-1">{{vehicule.VEHICULE_MARQUE}} {{vehicule.VEHICULE_MODELE}}</h1>
+    <h1 class="title is-1">{{this.VEHICULE_MARQUE}} {{this.VEHICULE_MODELE}}</h1>
 </div>
 <HR size="5">
 <div class="is-divider"></div>
@@ -8,35 +48,37 @@
         <div class="columns descriptif">
             <div class="columns ">
                 <div class="column"><p>Marque</p></div>
-                <div class="column"><p>{{vehicule.VEHICULE_MARQUE}} </p></div>
+                <div class="column"><p>{{this.VEHICULE_MARQUE}} </p></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Modèle</p></div>
-                <div class="column"><p>{{vehicule.VEHICULE_MODELE}} </p></div>
+                <div class="column"><p>{{this.VEHICULE_MODELE}} </p></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Agence Affiliée</p></div>
-                <div onclick="window.location = '{{thisURL}}agence/{{agence.AGENCE_ID}}';" class="column"><p>{{agence.AGENCE_NOM}}</p></div>
+                <div onclick="window.location = '{{thisURL}}agence/{{agence.AGENCE_ID}}';" class="column"><p>
+                    {{this.AGENCE_NOM}}</p></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Dimensions</p></div>
-                <div class="column"><p>{{vehicule.VEHICULE_HAUTEUR}} x {{vehicule.VEHICULE_LONGUEUR}} x {{vehicule.VEHICULE_LARGEUR}}</p></div>
+                <div class="column"><p>{{this.VEHICULE_HAUTEUR}} x {{this.VEHICULE_LONGUEUR}} x
+                    {{this.VEHICULE_LARGEUR}}</p></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Poids</p></div>
-                <div class="column"><p>{{vehicule.VEHICULE_POIDS}} kg</p></div>
+                <div class="column"><p>{{this.VEHICULE_POIDS}} kg</p></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Date de création</p></div>
-                <div class="column"><p>{{vehicule.VEHICULE_DATE_FABRICATION}}</p></div>
+                <div class="column"><p>{{this.VEHICULE_DATE_FABRICATION}}</p></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Date de prêt</p></div>
-                <div class="column"><p>{{vehicule.VEHICULE_DATE_DERNIER_PRET}}</p></div>
+                <div class="column"><p>{{this.VEHICULE_DATE_DERNIER_PRET}}</p></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Statut</p></div>
-                <div class="column"><p>{{vehicule.STATUT_LIB}</p></div>
+                <div class="column"><p>{{this.STATUT_LIB}}</p></div>
             </div>
             <div class="columns "></div>
         </div>
@@ -45,7 +87,11 @@
 </div>
 <div class="is-divider" data-content=""></div>
 <hr>
-<div class="buttons is-pulled-right	">
-    <a class="button">Signaler Retour</a>
-    <a class="button">Réserver</a>
+<div class="buttons">
+    <a class="button is-info" href="{{thisURL}}vehicule/retour/{{this.VEHICULE_ID}}">Signaler Retour</a>
+    <a class="button is-primary" href="{{thisURL}}vehicule/reserver/{{this.VEHICULE_ID}}">Réserver</a>
 </div>
+<br/>
+<br/>
+<br/>
+{{/each}}

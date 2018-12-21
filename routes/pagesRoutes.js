@@ -1,5 +1,4 @@
 "use strict";
-
 module.exports = [
 
     /*
@@ -19,7 +18,7 @@ module.exports = [
             try {
                 // Notre requête
                 // La réponse est stocké automatiquement sous la forme d'un JSON dans la variable rows
-                const [rows] = await pool.query('select * from vehicule;');
+                const [rows] = await pool.query('select * from vehicule LEFT JOIN agence ON VEHICULE_ID_AGENCE = AGENCE_ID LEFT JOIN statut ON VEHICULE_ID_STATUT = STATUT_ID;');
                 // On charge la vue 'front-page' avec nos données SQL
                 // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
                 return reply.view('liste-vehicule', {
@@ -27,8 +26,7 @@ module.exports = [
                     nb_vehicules: rows.length
                 });
             } catch (err) {
-                // Boom est un plugin permettant la gestion des erreurs de l'application
-                throw Boom.internal('Internal Mysql Error', err)
+                console.log(err);
             }
         }
     },
@@ -44,18 +42,14 @@ module.exports = [
             try {
                 // Notre requête
                 // La réponse est stocké automatiquement sous la forme d'un JSON dans la variable rows
-                const [rows] = await pool.query(`select * from vehicule LEFT JOIN statut on STATUT_ID = VEHICULE_ID_STATUT where VEHICULE_ID = ${request.params.vehicule_id};`);
-                const [rows2] = await pool.query(`select * from agence where AGENCE_ID = ${rows.VEHICULE_ID_AGENCE};`);
-
+                const [rows, fields] = await pool.query(`select * from vehicule LEFT JOIN statut ON STATUT_ID = VEHICULE_ID_STATUT LEFT JOIN agence ON AGENCE_ID = VEHICULE_ID_AGENCE where VEHICULE_ID = ${request.params.vehicule_id} GROUP BY VEHICULE_ID;`);
                 // On charge la vue 'front-page' avec nos données SQL
                 // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
                 return reply.view('statut-vehicule', {
                     vehicule: rows,
-                    agence: rows2
                 });
             } catch (err) {
-                // Boom est un plugin permettant la gestion des erreurs de l'application
-                throw Boom.internal('Internal Mysql Error', err)
+                console.log(err);
             }
         }
     },
@@ -77,8 +71,7 @@ module.exports = [
                 // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
                 return reply.view('info-vehicule', {vehicule: rows});
             } catch (err) {
-                // Boom est un plugin permettant la gestion des erreurs de l'application
-                throw Boom.internal('Internal Mysql Error', err)
+                console.log(err);
             }
         }
     },
@@ -92,14 +85,16 @@ module.exports = [
             // On ouvre une requête à MySQL
             const pool = request.mysql.pool;
             try {
-                const [rows] = await pool.query(`insert into utilisateur (UTILISATEUR_IDENTIFIANT, UTILISATEUR_NOM, UTILISATEUR_PRENOM, UTILISATEUR_TEL, UTILISATEUR_FAX, UTILISATEUR_MOBILE, UTILISATEUR_PWD) VALUES ("${request.payload.identifiant}", "${request.payload.nom}", "${request.payload.prenom}", , "${request.payload.tel}"), "${request.payload.fax}", "${request.payload.mobile}", "${request.payload.pwd}";`);
+                var datum = request.payload.date_fabrication;
+                let query = `insert into vehicule (\`VEHICULE_DATE_FABRICATION\`, \`VEHICULE_HAUTEUR\`, \`VEHICULE_LARGEUR\`, \`VEHICULE_LONGUEUR\`, \`VEHICULE_POIDS\`, \`VEHICULE_PUISSANCE\`, \`VEHICULE_ID_STATUT\`, \`VEHICULE_MARQUE\`, \`VEHICULE_MODELE\`, \`VEHICULE_ID_AGENCE\`) VALUES ("${datum}", ${request.payload.hauteur}, ${request.payload.largeur}, ${request.payload.longueur}, ${request.payload.poids}, ${request.payload.puissance}, 1, "${request.payload.marque}","${request.payload.modele}",${request.payload.id_agence});`;
+                await pool.query(query);
                 return reply.redirect('/vehicules');
             } catch (err) {
                 console.log(err);
-                throw Boom.internal('Internal Mysql Error', err)
             }
         }
     },
+
     {
         method: 'GET',
         path: '/vehicule/add',
@@ -116,7 +111,78 @@ module.exports = [
                 return reply.view('ajouter-vehicule', data);
             } catch (err) {
                 console.log(err);
-                throw Boom.internal('Internal Mysql Error', err)
+            }
+        }
+    },
+    {
+        method: 'GET',
+        path: '/vehicule/reserver/{vehicule_id}',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            const pool = request.mysql.pool;
+            try {
+                const [rows] = await pool.query(`select * from vehicule LEFT JOIN agence ON AGENCE_ID = VEHICULE_ID_AGENCE where VEHICULE_ID = ${request.params.vehicule_id} GROUP BY VEHICULE_ID`);
+                let data = {
+                    vehicules: rows
+                };
+                return reply.view('reserver-vehicule', data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    },
+
+    {
+        method: 'GET',
+        path: '/vehicule/retour/{vehicule_id}',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            const pool = request.mysql.pool;
+            try {
+                const [rows] = await pool.query(`select * from vehicule LEFT JOIN agence ON AGENCE_ID = VEHICULE_ID_AGENCE where VEHICULE_ID = ${request.params.vehicule_id} GROUP BY VEHICULE_ID`);
+                let data = {
+                    vehicules: rows
+                };
+                return reply.view('signaler-retour', data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    },
+    {
+        method: 'POST',
+        path: '/vehicule/reserver/{vehicule_id}',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            const pool = request.mysql.pool;
+            try {
+                const [rows2] = await pool.query(`UPDATE vehicule SET VEHICULE_DATE_FIN_PRET = "${request.payload.date_fin_pret}", VEHICULE_DATE_DEBUT_PRET = "${request.payload.date_debut_pret}", VEHICULE_ID_STATUT = 2 WHERE VEHICULE_ID = ${request.params.vehicule_id}`);
+                const [rows] = await pool.query('select * from vehicule LEFT JOIN agence ON VEHICULE_ID_AGENCE = AGENCE_ID LEFT JOIN statut ON VEHICULE_ID_STATUT = STATUT_ID;');
+                return reply.redirect('/vehicules');
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    },
+    {
+        method: 'POST',
+        path: '/vehicule/retour/{vehicule_id}',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            const pool = request.mysql.pool;
+            try {
+                await pool.query(`UPDATE vehicule SET VEHICULE_ID_STATUT = 1, VEHICULE_DATE_FIN_PRET = "", VEHICULE_DATE_DEBUT_PRET = "" WHERE VEHICULE_ID = ${request.params.vehicule_id}`);
+                return reply.redirect('/vehicules');
+            } catch (err) {
+                console.log(err);
             }
         }
     },
@@ -137,7 +203,7 @@ module.exports = [
                 const [rows] = await pool.query('select * from agence;');
                 return reply.view('liste-agence', {agences: rows});
             } catch (err) {
-                throw Boom.internal('Internal Mysql Error', err)
+                console.log(err);
             }
         }
     },
@@ -151,9 +217,9 @@ module.exports = [
             const pool = request.mysql.pool;
             try {
                 const [rows] = await pool.query(`select * from agence where AGENCE_ID = ${request.params.id_agence};`);
-                return reply.view('statut-agence', {agences: rows});
+                return reply.view('info-agence', {agences: rows});
             } catch (err) {
-                throw Boom.internal('Internal Mysql Error', err)
+                console.log(err);
             }
         }
     },
@@ -178,11 +244,12 @@ module.exports = [
             // On ouvre une requête à MySQL
             const pool = request.mysql.pool;
             try {
-                const [rows] = await pool.query(`insert into utilisateur (UTILISATEUR_IDENTIFIANT, UTILISATEUR_NOM, UTILISATEUR_PRENOM, UTILISATEUR_TEL, UTILISATEUR_FAX, UTILISATEUR_MOBILE, UTILISATEUR_PWD) VALUES ("${request.payload.identifiant}", "${request.payload.nom}", "${request.payload.prenom}", , "${request.payload.tel}"), "${request.payload.fax}", "${request.payload.mobile}", "${request.payload.pwd}";`);
-                return reply.redirect('/vehicules');
+                let query = `insert into agence (\`AGENCE_NOM\`, \`AGENCE_NUM_ADRESSE\`, \`AGENCE_NOM_ADRESSE\`, \`AGENCE_MAIL\`, \`AGENCE_TEL\`, \`AGENCE_FAX\`, \`AGENCE_CP\`, \`AGENCE_VILLE\`)  VALUES ("${request.payload.nom}", "${request.payload.num_adresse}", "${request.payload.nom_adresse}", "${request.payload.mail}", "${request.payload.tel}", "${request.payload.fax}", "${request.payload.cp}", "${request.payload.ville}");`;
+                await pool.query(query);
+                //  INSERT INTO `agence` (`AGENCE_ID`, `AGENCE_NOM`, `AGENCE_NUM_ADRESSE`, `AGENCE_NOM_ADRESSE`, `AGENCE_MAIL`, `AGENCE_TEL`, `AGENCE_FAX`, `AGENCE_ID_FICHIER`, `AGENCE_CP`, `AGENCE_VILLE`) VALUES (2, 'Trotro6', '56', 'Labas', 'toto@toto.fr', '0304056001', '0807090645', NULL, '55440', 'Lamarche');
+                return reply.redirect('/agences');
             } catch (err) {
                 console.log(err);
-                throw Boom.internal('Internal Mysql Error', err)
             }
         }
     },
@@ -219,21 +286,41 @@ module.exports = [
             return reply.view('creer-statut');
         }
     },
-
-
-    /*
-     ****************************
-     ********** TICKET **********
-     ****************************
-     */
-
-
-    /*
-     ****************************
-     ******** TYPE HISTO ********
-     ****************************
-     */
-
+    {
+        method: 'POST',
+        path: '/statut/add',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            // On ouvre une requête à MySQL
+            const pool = request.mysql.pool;
+            try {
+                let query = `insert into statut (\`STATUT_LIB\`, \`STATUT_DESCRIPTION\`)  VALUES ("${request.payload.lib}", "${request.payload.description}");`;
+                console.log(query);
+                await pool.query(query);
+                return reply.redirect('/statuts');
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    },
+    {
+        method: 'GET',
+        path: '/statuts',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            const pool = request.mysql.pool;
+            try {
+                const [rows] = await pool.query('select * from statut;');
+                return reply.view('liste-statuts', {statuts: rows});
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    },
 
     /*
      ****************************
@@ -247,7 +334,30 @@ module.exports = [
             auth: 'session'
         },
         async handler(request, reply) {
-            return reply.view('ajouter-utilisateur');
+            const pool = request.mysql.pool;
+            try {
+                const [rows] = await pool.query('select * from agence;');
+                return reply.view('ajouter-utilisateur', {agences: rows});
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    },
+    {
+        method: 'POST',
+        path: '/utilisateur/add',
+        config: {
+            auth: 'session'
+        },
+        async handler(request, reply) {
+            const pool = request.mysql.pool;
+            try {
+                let query = `INSERT INTO utilisateur (\`UTILISATEUR_IDENTIFIANT\`, \`UTILISATEUR_NOM\`, \`UTILISATEUR_PRENOM\`, \`UTILISATEUR_TEL\`, \`UTILISATEUR_FAX\`, \`UTILISATEUR_MOBILE\`, \`UTILISATEUR_ID_AGENCE\`, \`UTILISATEUR_PWD\`) values ("${request.payload.identifiant}", "${request.payload.nom}", "${request.payload.prenom}", "${request.payload.tel}", "${request.payload.fax}", "${request.payload.mobile}", "${request.payload.id_agence}", "${request.payload.num_adresse}");`;
+                await pool.query(query);
+                return reply.redirect('/utilisateurs');
+            } catch (err) {
+                console.log(err);
+            }
         }
     },
     {
@@ -260,17 +370,12 @@ module.exports = [
             // On ouvre une requête à MySQL
             const pool = request.mysql.pool;
             try {
-                // Notre requête
-                // La réponse est stocké automatiquement sous la forme d'un JSON dans la variable rows
-                const [rows] = await pool.query('select * from utilisateur;');
-                // On charge la vue 'front-page' avec nos données SQL
-                // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
+                const [rows] = await pool.query('select * from utilisateur LEFT JOIN agence ON UTILISATEUR_ID_AGENCE = AGENCE_ID;');
                 return reply.view('liste-utilisateurs', {
                     utilisateurs: rows,
                 });
             } catch (err) {
-                // Boom est un plugin permettant la gestion des erreurs de l'application
-                throw Boom.internal('Internal Mysql Error', err)
+                console.log(err);
             }
         }
     },
@@ -284,34 +389,10 @@ module.exports = [
             // On ouvre une requête à MySQL
             const pool = request.mysql.pool;
             try {
-                // Notre requête
-                // La réponse est stocké automatiquement sous la forme d'un JSON dans la variable rows
-                const [rows] = await pool.query(`select * from utilisateur where UTILISATEUR_ID = ${request.params.utilisateur_id};`);
-
-                // On charge la vue 'front-page' avec nos données SQL
-                // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
+                const [rows] = await pool.query(`select * from utilisateur LEFT JOIN agence ON AGENCE_ID = UTILISATEUR_ID_AGENCE where UTILISATEUR_ID = ${request.params.utilisateur_id};`);
                 return reply.view('info-utilisateur', {utilisateur: rows});
             } catch (err) {
-                // Boom est un plugin permettant la gestion des erreurs de l'application
-                throw Boom.internal('Internal Mysql Error', err)
-            }
-        }
-    },
-    {
-        method: 'POST',
-        path: '/utilisateur/add',
-        config: {
-            auth: 'session'
-        },
-        async handler(request, reply) {
-            // On ouvre une requête à MySQL
-            const pool = request.mysql.pool;
-            try {
-                const [rows] = await pool.query(`insert into utilisateur (UTILISATEUR_IDENTIFIANT, UTILISATEUR_NOM, UTILISATEUR_PRENOM, UTILISATEUR_TEL, UTILISATEUR_FAX, UTILISATEUR_MOBILE, UTILISATEUR_PWD) VALUES ("${request.payload.identifiant}", "${request.payload.nom}", "${request.payload.prenom}", , "${request.payload.tel}"), "${request.payload.fax}", "${request.payload.mobile}", "${request.payload.pwd}";`);
-                return reply.redirect('/vehicules');
-            } catch (err) {
                 console.log(err);
-                throw Boom.internal('Internal Mysql Error', err)
             }
         }
     },

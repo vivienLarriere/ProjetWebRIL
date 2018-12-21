@@ -90,10 +90,13 @@ const launchServer = async function () {
                               let account = null;
                               let uuid = 0;
                               const [rows, fields] = await pool.query(`select * from utilisateur where UTILISATEUR_IDENTIFIANT = "${request.payload.name}" AND UTILISATEUR_PWD = "${request.payload.password}";`);
+                              if (rows.length === 0) {
+                                  let msg = 'Identifiant ou mot de passe incorrect';
+                                  return h.redirect('/login', {msg: msg});
+                              }
                               const sid = String(++uuid);
                               await request.server.app.cache.set(sid, {account}, 0);
                               request.cookieAuth.set({sid});
-
                               return h.redirect('/');
                           } catch (err) {
                               // Boom est un plugin permettant la gestion des erreurs de l'application
