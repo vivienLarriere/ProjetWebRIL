@@ -51,36 +51,34 @@
 		<!-- Titre page -->
 		<div class="column is-one-fifth is-primary" style="text-align: right;">
 		</div>
-		<!-- LOGO -->
+        <!-- LOGO -->
 		<div class="column is-one-fifth">
 			<a href="{{thisURL}}"> <img src="{{thisURL}}images/logo.png" width=""/></a>
 		</div>
 	</div>
 </span>
 <section class="section">
-	<div><h1 class="title">Ajouter un statut</h1></div>
-	<form method="post" action="{{thisURL}}statut/add">
-		<div class="columns descriptif">
-			<div class="column">
-				<div class="columns ">
-					<div class="column"><p>Nom</p></div>
-					<div class="column"><input class="input" name="lib" type="text" placeholder=""></div>
-				</div>
-				<div class="columns ">
-					<div class="column"><p>Description</p></div>
-					<div class="column">
-						<a href="{{thisURL}}statuts"><span class="button is-medium">
-							<i class="fas fa-car fa-2x"></i>
-						</span></a>
-					</div>
-				</div>
-				<div class="columns is-pulled-right">
-					<div class="column 	">
-						<a href="javascript:history.go(-1)" class="button is-warning is-medium">Retour</a>
-						<input type="submit" class="button is-success is-medium" value="Valider">
-					</div>
-				</div>
-			</div>
-		</div>
-	</form>
+    <div><h1 class="title">Ajouter un statut</h1></div>
+    <form method="post" action="{{thisURL}}statut/add">
+        <div class="columns descriptif">
+            <div class="column">
+                <div class="columns ">
+                    <div class="column"><p>Nom</p></div>
+                    <div class="column"><input class="input" name="lib" type="text" placeholder=""></div>
+                </div>
+                <div class="columns ">
+                    <div class="column"><p>Description</p></div>
+                    <div class="column">
+                        <textarea name="description"></textarea>
+                    </div>
+                </div>
+                <div class="columns is-pulled-right">
+                    <div class="column 	">
+                        <a href="javascript:history.go(-1)" class="button is-warning is-medium">Retour</a>
+                        <input type="submit" class="button is-success is-medium" value="Valider">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </section>

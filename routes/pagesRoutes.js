@@ -44,7 +44,7 @@ module.exports = [
                 // On charge la vue 'front-page' avec nos données SQL
                 // La variable 'vehicule' aura la valeur de retour de notre serveur de BDD
                 // La réponse est stocké automatiquement sous la forme d'un JSON dans la variable rows
-                const [rows] = await pool.query(`select * from vehicule LEFT JOIN statut ON STATUT_ID = VEHICULE_ID_STATUT LEFT JOIN agence ON AGENCE_ID = VEHICULE_ID_AGENCE LEFT JOIN historique ON VEHICULE_ID = HISTO_VEHICULE_ID LEFT JOIN type_histo ON HISTO_ID_TYPE_HISTO where VEHICULE_ID = ${request.params.vehicule_id};`);
+                const [rows] = await pool.query(`select * from vehicule LEFT JOIN statut ON STATUT_ID = VEHICULE_ID_STATUT LEFT JOIN agence ON AGENCE_ID = VEHICULE_ID_AGENCE LEFT JOIN historique ON VEHICULE_ID = HISTO_VEHICULE_ID where VEHICULE_ID = ${request.params.vehicule_id} GROUP BY VEHICULE_ID;`);
                 const [rows2] = await pool.query(`select * from historique LEFT JOIN type_histo ON HISTO_ID_TYPE_HISTO = TYPE_HISTO_ID where HISTO_VEHICULE_ID = ${request.params.vehicule_id};`);
                 return reply.view('statut-vehicule', {
                     vehicule: rows,
@@ -166,6 +166,7 @@ module.exports = [
             try {
                 await pool.query(`UPDATE vehicule SET VEHICULE_DATE_FIN_PRET = "${request.payload.date_fin_pret}", VEHICULE_DATE_DEBUT_PRET = "${request.payload.date_debut_pret}", VEHICULE_ID_STATUT = 2 WHERE VEHICULE_ID = ${request.params.vehicule_id}`);
                 let query2 = `insert into historique (\`HISTO_ID_TYPE_HISTO\`, \`HISTO_VEHICULE_ID\`) VALUES (2, ${request.params.vehicule_id});`;
+                await pool.query(query2);
                 const [rows] = await pool.query('select * from vehicule LEFT JOIN agence ON VEHICULE_ID_AGENCE = AGENCE_ID LEFT JOIN statut ON VEHICULE_ID_STATUT = STATUT_ID;');
                 return reply.redirect('/vehicules');
             } catch (err) {
@@ -183,6 +184,8 @@ module.exports = [
             const pool = request.mysql.pool;
             try {
                 await pool.query(`UPDATE vehicule SET VEHICULE_ID_STATUT = 1, VEHICULE_DATE_FIN_PRET = "", VEHICULE_DATE_DEBUT_PRET = "" WHERE VEHICULE_ID = ${request.params.vehicule_id}`);
+                let query2 = `insert into historique (\`HISTO_ID_TYPE_HISTO\`, \`HISTO_VEHICULE_ID\`) VALUES (1, ${request.params.vehicule_id});`;
+                await pool.query(query2);
                 return reply.redirect('/vehicules');
             } catch (err) {
                 console.log(err);
