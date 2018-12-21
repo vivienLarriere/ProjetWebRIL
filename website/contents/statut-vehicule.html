@@ -57,30 +57,6 @@
         </div>
     </div>
 </span>
-{{#each vehicule}}
-<div>
-    <h1 class="title is-1">{{this.VEHICULE_MARQUE}} {{this.VEHICULE_MODELE}}</h1>
-</div>
-<HR size="5">
-<div class="is-divider"></div>
-<div class="columns">
-    <div class="column">
-        <div class="columns descriptif">
-            <div class="columns ">
-                <div class="column"><p>Marque</p></div>
-                <div class="column"><p>{{this.VEHICULE_MARQUE}} </p></div>
-            </div>
-        </div>
-        <div class="column is-one-fifth"></div>
-        <!-- Titre page -->
-        <div class="column is-one-fifth" style="text-align: right;">
-        </div>
-        <!-- LOGO -->
-        <div class="column is-one-fifth">
-            <a href="{{thisURL}}"> <img src="{{thisURL}}images/logo.png" width=""/></a>
-        </div>
-    </div>
-</span>
 <section class="section">
     {{#each vehicule}}
     <div>
@@ -127,8 +103,10 @@
                 </div>
                 <div class="columns "></div>
                 <div class="buttons is-pulled-right">
-                    <a class="button is-info" href="{{thisURL}}vehicule/retour/{{this.VEHICULE_ID}}">Signaler Retour</a>
-                    <a class="button is-primary" href="{{thisURL}}vehicule/reserver/{{this.VEHICULE_ID}}">Réserver</a>
+                    <a class="button is-info" href="{{thisURL}}vehicule/retour/{{this.VEHICULE_ID}}">Signaler
+                        Retour</a>
+                    <a class="button is-primary"
+                       href="{{thisURL}}vehicule/reserver/{{this.VEHICULE_ID}}">Réserver</a>
                 </div>
             </div>
         </div>
@@ -159,3 +137,4 @@
     <br/>
     <br/>
 </section>
+</div>
