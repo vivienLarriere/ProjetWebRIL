@@ -1,79 +1,87 @@
 <!-- menu-->
 <span class="menu-interne">
-			<div class="columns">
-			<div class="column is-one-third">
-				<div class="columns">
-					<div class="column ">
-						<a href="{{thisURL}}"><span class="button is-medium">
-							<i class="fas fa-home fa-2x"></i>
-						</span></a>
-					</div>
-					<div class="column">
-						<a href="{{thisURL}}statut"><span class="button is-medium">
-							<i class="fas fa-car fa-2x"></i>
-						</span></a>
-					</div>
-					<div class="column">
-						<a href="{{thisURL}}vehicules"><span class="button is-medium">
-							<img src="{{thisURL}}images/choisir-un-vehicule.png" width="32px"/>
-						</span></a>
-					</div>
-					<div class="column">
-						<a href="{{thisURL}}logout"><span class="button is-medium">
-							<i class="fas fa-unlock fa-2x"></i>
-						</span></a>
-					</div>
-                    </di>
-				</div>
-			</div>
-			<div class="column is-one-fifth"></div>
-                <!-- Titre page -->
-			<div class="column is-one-fifth" style="text-align: right;">
-				<p>Socopec Entretien</p>
-			</div>
-                <!-- LOGO -->
-			<div class="column is-one-fifth">
-				<a href="{{thisURL}}"> <img src="{{thisURL}}images/logo.png" width=""/></a>
-			</div>
-		</div>
-	</span>
+    <div class="columns">
+        <div class="column is-one-third">
+            <div class="columns">
+                <div class="column ">
+                    <a href="{{thisURL}}"><span class="button is-medium">
+                        <i class="fas fa-home fa-2x"></i>
+                    </span></a>
+                </div>
+                <div class="column">
+                    <a href="{{thisURL}}statut"><span class="button is-medium">
+                        <i class="fas fa-car fa-2x"></i>
+                    </span></a>
+                </div>
+                <div class="column">
+                    <a href="{{thisURL}}vehicules"><span class="button is-medium">
+                        <img src="{{thisURL}}images/choisir-un-vehicule.png" width="32px"/>
+                    </span></a>
+                </div>
+                <div class="column">
+                    <a href="{{thisURL}}logout"><span class="button is-medium">
+                        <i class="fas fa-unlock fa-2x"></i>
+                    </span></a>
+                </div>
+                </di>
+            </div>
+        </div>
+        <div class="column is-one-fifth"></div>
+        <!-- Titre page -->
+        <div class="column is-one-fifth" style="text-align: right;">
+            
+        </div>
+        <!-- LOGO -->
+        <div class="column is-one-fifth">
+            <a href="{{thisURL}}"> <img src="{{thisURL}}images/logo.png" width=""/></a>
+        </div>
+    </div>
+</span>
 <section class="section">
     <!--Insérer le texte pour le site-->
     <!-- Liste des utilisateurs -->
     <div>
+        <h1 class="title">Gérer les utilisateurs</h1>
     </div>
     <!-- Barre de recherche rapide -->
     <!--  <div class="columns recherche">
-          <div class="column"><input class="input" placeholder="Nom" type="text"></div>
-          <div class="column"><input class="input" placeholder="Prenom" type="text"></div>
-          <div class="column"><input class="input" placeholder="Téléphone" type="text"></div>
-          <div class="column"><input class="button" type="reset" value="Réinitialiser">
-              <input class="button" type="submit" value="Rechercher"></div>
-      </div> -->
+        <div class="column"><input class="input" placeholder="Nom" type="text"></div>
+        <div class="column"><input class="input" placeholder="Prenom" type="text"></div>
+        <div class="column"><input class="input" placeholder="Téléphone" type="text"></div>
+        <div class="column"><input class="button" type="reset" value="Réinitialiser">
+        <input class="button" type="submit" value="Rechercher"></div>
+    </div> -->
+    <div class="columns">
+        <div class="column">
+            <a class="button is-one-fifth is-primary" href="{{thisURL}}utilisateur/add">
+                <i style="display: none;" class="fas fa-user-plus fa-1x"></i>&nbsp; <p>Ajouter utilisateur</p>
+            </a>
+        </div>
+    </div>
     <!-- TABLEAU -->
     <div>
         <table class="table is-fullwidth">
             <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Télephone</th>
-                <th>Mobile</th>
-                <th>Identifiant</th>
-                <th>Agence</th>
-            </tr>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Télephone</th>
+                    <th>Mobile</th>
+                    <th>Identifiant</th>
+                    <th>Agence</th>
+                </tr>
             </thead>
             <tbody>
-            {{#each utilisateurs}}
-            <tr onclick="window.location='{{thisURL}}utilisateur/{{this.UTILISATEUR_ID}}';">
-                <td>{{this.UTILISATEUR_NOM}}</td>
-                <td>{{this.UTILISATEUR_PRENOM}}</td>
-                <td>{{this.UTILISATEUR_TEL}}</td>
-                <td>{{this.UTILISATEUR_MOBILE}}</td>
-                <td>{{this.UTILISATEUR_IDENTIFIANT}}</td>
-                <td>{{this.AGENCE_NOM}}</td>
-            </tr>
-            {{/each}}
+                {{#each utilisateurs}}
+                <tr onclick="window.location='{{thisURL}}utilisateur/{{this.UTILISATEUR_ID}}';">
+                    <td>{{this.UTILISATEUR_NOM}}</td>
+                    <td>{{this.UTILISATEUR_PRENOM}}</td>
+                    <td>{{this.UTILISATEUR_TEL}}</td>
+                    <td>{{this.UTILISATEUR_MOBILE}}</td>
+                    <td>{{this.UTILISATEUR_IDENTIFIANT}}</td>
+                    <td>{{this.AGENCE_NOM}}</td>
+                </tr>
+                {{/each}}
             </tbody>
         </table>
     </div>

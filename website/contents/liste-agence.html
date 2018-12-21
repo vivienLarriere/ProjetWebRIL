@@ -3,70 +3,73 @@
     <!--Insérer le texte pour le site-->
     <!-- MENU -->
     <span class="menu-interne">
-			<div class="columns">
-			<div class="column is-one-third">
-				<div class="columns">
-					<div class="column ">
-						<a href="{{thisURL}}"><span class="button is-medium">
-							<i class="fas fa-home fa-2x"></i>
-						</span></a>
-					</div>
-					<div class="column">
-						<a href="{{thisURL}}statut"><span class="button is-medium">
-							<i class="fas fa-car fa-2x"></i>
-						</span></a>
-					</div>
-					<div class="column">
-						<a href="{{thisURL}}vehicules"><span class="button is-medium">
-							<img src="{{thisURL}}images/choisir-un-vehicule.png" width="32px"/>
-						</span></a>
-					</div>
-					<div class="column">
-						<a href="{{thisURL}}logout"><span class="button is-medium">
-							<i class="fas fa-unlock fa-2x"></i>
-						</span></a>
-					</div>
+        <div class="columns">
+            <div class="column is-one-third">
+                <div class="columns">
+                    <div class="column ">
+                        <a href="{{thisURL}}"><span class="button is-medium">
+                            <i class="fas fa-home fa-2x"></i>
+                        </span></a>
+                    </div>
+                    <div class="column">
+                        <a href="{{thisURL}}statut"><span class="button is-medium">
+                            <i class="fas fa-car fa-2x"></i>
+                        </span></a>
+                    </div>
+                    <div class="column">
+                        <a href="{{thisURL}}vehicules"><span class="button is-medium">
+                            <img src="{{thisURL}}images/choisir-un-vehicule.png" width="32px"/>
+                        </span></a>
+                    </div>
+                    <div class="column">
+                        <a href="{{thisURL}}logout"><span class="button is-medium">
+                            <i class="fas fa-unlock fa-2x"></i>
+                        </span></a>
+                    </div>
                     </di>
-				</div>
-			</div>
-			<div class="column is-one-fifth"></div>
-                <!-- Titre page -->
-			<div class="column is-one-fifth" style="text-align: right;">
-				<p>Socopec Entretien</p>
-			</div>
-                <!-- LOGO -->
-			<div class="column is-one-fifth">
-				<a href="{{thisURL}}"> <img src="{{thisURL}}images/logo.png" width=""/></a>
-			</div>
-		</div>
-	</span>
+                </div>
+            </div>
+            <div class="column is-one-fifth"></div>
+            <!-- Titre page -->
+            <div class="column is-one-fifth is-primary" style="text-align: right;">
+            </div>
+            <!-- LOGO -->
+            <div class="column is-one-fifth">
+                <a href="{{thisURL}}"> <img src="{{thisURL}}images/logo.png" width=""/></a>
+            </div>
+        </div>
+    </span></section>
     <!-- Page d'accueil -->
-    <div>
-        <a href="{{thisURL}}agence/add" class="button is-primary">Ajouter une agence</a>
-    </div>
-    <!-- Barre de recherche rapide -->
-    <!-- TABLEAU -->
-    <div>
-        <table class="table is-fullwidth">
-            <thead>
-            <tr>
-                <th>Agence</th>
-                <th>Adresse</th>
-                <th>Tél.</th>
-                <th>Fax</th>
-            </tr>
-            </thead>
-            <!-- Mettre balises pour les données de la DB -->
-            <tbody>
-            {{#each agences}}
-            <tr onclick="window.location.href = '{{thisURL}}agence/{{this.AGENCE_ID}}'">
-                <td>{{this.AGENCE_NOM}}</td>
-                <td>{{this.AGENCE_ADRESSE}}</td>
-                <td>{{this.AGENCE_TEL}}</td>
-                <td>{{this.AGENCE_FAX}}</td>
-            </tr>
-            {{/each}}
-            </tbody>
-        </table>
-    </div>
-</section>
+    <section class="section">
+        <div>
+            <h1 class="title">Gérer les agences</h1>
+        </div>
+        <div>
+            <a href="{{thisURL}}agence/add" class="button is-primary ">Ajouter une agence</a>
+        </div>
+        <!-- Barre de recherche rapide -->
+        <!-- TABLEAU -->
+        <div>
+            <table class="table is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>Agence</th>
+                        <th>Adresse</th>
+                        <th>Tél.</th>
+                        <th>Fax</th>
+                    </tr>
+                </thead>
+                <!-- Mettre balises pour les données de la DB -->
+                <tbody>
+                    {{#each agences}}
+                    <tr onclick="window.location.href = '{{thisURL}}agence/{{this.AGENCE_ID}}'">
+                        <td>{{this.AGENCE_NOM}}</td>
+                        <td>{{this.AGENCE_ADRESSE}}</td>
+                        <td>{{this.AGENCE_TEL}}</td>
+                        <td>{{this.AGENCE_FAX}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </section>
