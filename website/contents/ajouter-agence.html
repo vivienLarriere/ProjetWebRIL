@@ -1,48 +1,48 @@
 <form action="{{thisURL}}agence/add" method="post">
+    <!-- menu-->
     <span class="menu-interne">
-        <div class="columns">
-            <!-- menu-->
-            <div class="column is-one-third">
-                <div class="columns">
-                    <div class="column ">
-                        <a href="{{thisURL}}"><span class="button is-medium">
-                            <i class="fas fa-home fa-2x"></i>
-                        </span></a>
-                    </div>
-                    <div class="column">
-                        <span class="button is-medium">
-                            <i class="fas fa-car fa-2x"></i>
-                        </span>
-                    </div>
-                    <div class="column">
-                        <span class="button is-medium">
-                            <img src="{{thisURL}}images/choisir-un-vehicule.png" width="32px"/>
-                        </span>
-                    </div>
-                    <div class="column">
-                        <span class="button is-medium">
-                            <i class="fas fa-unlock fa-2x"></i>
-                        </span>
-                    </div>
+			<div class="columns">
+			<div class="column is-one-third">
+				<div class="columns">
+					<div class="column ">
+						<a href="{{thisURL}}"><span class="button is-medium">
+							<i class="fas fa-home fa-2x"></i>
+						</span></a>
+					</div>
+					<div class="column">
+						<a href="{{thisURL}}statuts"><span class="button is-medium">
+							<i class="fas fa-car fa-2x"></i>
+						</span></a>
+					</div>
+					<div class="column">
+						<a href="{{thisURL}}vehicules"><span class="button is-medium">
+							<img src="{{thisURL}}images/choisir-un-vehicule.png" width="32px"/>
+						</span></a>
+					</div>
+					<div class="column">
+						<a href="{{thisURL}}logout"><span class="button is-medium">
+							<i class="fas fa-unlock fa-2x"></i>
+						</span></a>
+					</div>
                     </di>
-                </div>
-            </div>
-            <div class="column is-one-fifth"></div>
-            <!-- Titre page -->
-            <div class="column is-one-fifth">
-                <h1>Ajouter une agence</h1>
-            </div>
-            <!-- LOGO -->
-            <div class="column is-one-fifth">
-                <img src="{{thisURL}}images/logo.png" width=""/>
-            </div>
-        </div>
-    </span>
+				</div>
+			</div>
+			<div class="column is-one-fifth"></div>
+                <!-- Titre page -->
+			<div class="column is-one-fifth" style="text-align: right;">
+				<p>Socopec Entretien</p>
+			</div>
+                <!-- LOGO -->
+			<div class="column is-one-fifth">
+				<a href="{{thisURL}}"> <img src="{{thisURL}}images/logo.png" width=""/></a>
+			</div>
+		</div>
+	</span>
     <div class="columns descriptif">
         <div class="column">
             <div class="columns ">
-                <div class="column"><p>Ville</p></div>
-                <div class="column"><input class="input" name="ville" placeholder="" type="text"></div>
+                <div class="column"><p>Nom</p></div>
+                <div class="column"><input class="input" name="nom" placeholder="" type="text"></div>
             </div>
             <div class="columns ">
                 <div class="column"><p>Adresse</p></div>
